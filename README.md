@@ -1,7 +1,7 @@
 # 💫 Hi, Im @Shidori5417! 
 
 <p align="left">
-  <img src="https://count.getloli.com/get/@lynchest?theme=asoul" alt="Ziyaretçi Sayısı" />
+  <img src="https://count.getloli.com/get/@Shidori5417?theme=asoul" alt="Ziyaretçi Sayısı" />
 </p>
 
 <h1 align="center">Hi 👋, I'm Mehmet Karaca</h1>
