@@ -1,3 +1,9 @@
+# 💫 Hi, Im @Shidori5417! 
+
+<p align="left">
+  <img src="https://count.getloli.com/get/@lynchest?theme=asoul" alt="Ziyaretçi Sayısı" />
+</p>
+
 <h1 align="center">Hi 👋, I'm Mehmet Karaca</h1>
 <h3 align="center">I am a 17-year-old FullStack developer from Turkey who is hungry to learn</h3>
 
