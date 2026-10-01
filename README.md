@@ -7,6 +7,8 @@
 <h1 align="center">Hi 👋, I'm Mehmet Karaca</h1>
 <h3 align="center">I am a 17-year-old FullStack developer from Turkey who is hungry to learn</h3>
 
+- 🌐 Portfolio & personal website: [Shidori Lab](https://shidori-lab.cengo23434wer56et45r.chatgpt.site)
+
 - 🔭 I’m currently working on [Context-Switcher](https://github.com/Shidori5417/Context-Switcher)
 
 - 🌱 I’m currently learning **Frameworks, Databases**
