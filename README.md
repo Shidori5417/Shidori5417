@@ -1,46 +1,96 @@
-<h1 align="center">Hi 👋, I'm Mehmet Karaca</h1>
-<h3 align="center">Full-stack developer from Turkey, always learning</h3>
+# Hi, I'm Mehmet Karaca (Shidori)
+
+**Full-Stack Developer · Software Engineering Student · Tech Enthusiast**
+
+I'm a developer from Turkey who enjoys building software, exploring new technologies, and solving real-world problems. I'm continuously improving my skills in application development, modern frameworks, databases, and system architecture.
 
 <p align="center">
-  <img src="https://count.getloli.com/get/@Shidori5417?theme=asoul" alt="Profile views" />
+  <img src="https://count.getloli.com/get/@Shidori5417?theme=asoul" alt="Profile visitor counter" />
 </p>
 
 ---
 
-## 👨‍💻 About me
+### About Me
 
-I build applications that fit modern life, from idea to deployment. I enjoy turning small problems into tools people actually use.
+- 🌐 **Portfolio:** [Shidori Lab](https://shidori-lab.cengo23434wer56et45r.chatgpt.site)
+- 🔭 **Currently working on:** [Context-Switcher](https://github.com/Shidori5417/Context-Switcher)
+- 🌱 **Currently learning:** Modern frameworks, databases, and software architecture
+- 👯 **Open to:** Collaborating on application development and open-source projects
+- 💡 **Interested in:** Modern software, cybersecurity, AI, and developer tools
+- 📂 **Projects:** [Explore my repositories](https://github.com/Shidori5417?tab=repositories)
+- 📫 **Contact:** [temhemkaraca@gmail.com](mailto:temhemkaraca@gmail.com)
 
-- 🔭 Currently working on **[Context-Switcher](https://github.com/Shidori5417/Context-Switcher)**
-- 🌱 Currently learning **frameworks and databases**
-- 👯 Open to collaborating on **application development**
-- 🌐 Portfolio: **[Shidori Lab](https://shidori-lab.cengo23434wer56et45r.chatgpt.site)**
+---
 
-## 🛠️ Tech stack
+### Connect With Me
 
 <p align="left">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="React" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="Node.js" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="PostgreSQL" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="Docker" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" width="40" height="40"/>
+  <a href="https://github.com/Shidori5417">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="https://instagram.com/mehmetkrc16_">
+    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
+  </a>
+  <a href="mailto:temhemkaraca@gmail.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
 </p>
 
-## 📌 Featured projects
+---
 
-| Project | Description |
-|---|---|
-| [Context-Switcher](https://github.com/Shidori5417/Context-Switcher) | Short one-line description of what it does |
-| [Project 2](https://github.com/Shidori5417) | One-line description |
-| [Project 3](https://github.com/Shidori5417) | One-line description |
+### Tech Stack
 
-More at **[github.com/Shidori5417](https://github.com/Shidori5417)**
+#### Languages
 
-## 📫 Connect with me
+<p>
+  <img src="https://skillicons.dev/icons?i=js,ts,python,cs,cpp,go,rust,java,kotlin,dart,php,swift,bash" alt="Programming languages" />
+</p>
 
-<p align="left">
-  <a href="https://instagram.com/mehmetkrc16_" target="_blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="Instagram" height="30" width="40"/></a>
+#### Frontend Development
+
+<p>
+  <img src="https://skillicons.dev/icons?i=html,css,react,nextjs,vue,tailwind,bootstrap,webpack" alt="Frontend technologies" />
+</p>
+
+#### Backend Development & Frameworks
+
+<p>
+  <img src="https://skillicons.dev/icons?i=nodejs,express,nestjs,django,dotnet,graphql" alt="Backend technologies" />
+</p>
+
+#### Databases & Messaging
+
+<p>
+  <img src="https://skillicons.dev/icons?i=postgres,mongodb,mysql,sqlite,redis,firebase,rabbitmq" alt="Databases and messaging" />
+</p>
+
+#### DevOps, Cloud & Infrastructure
+
+<p>
+  <img src="https://skillicons.dev/icons?i=linux,docker,kubernetes,nginx,aws,gcp,git,github,arduino" alt="DevOps and infrastructure" />
+</p>
+
+#### Mobile, Desktop & AI
+
+<p>
+  <img src="https://skillicons.dev/icons?i=flutter,android,electron,pytorch,tensorflow,opencv,unreal" alt="Mobile, desktop, AI, and graphics technologies" />
+</p>
+
+---
+
+### GitHub Statistics
+
+<p align="center">
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=Shidori5417&show_icons=true&hide_border=true&theme=transparent&rank_icon=github" alt="GitHub statistics" />
+  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Shidori5417&layout=compact&hide_border=true&theme=transparent" alt="Most used languages" />
+</p>
+
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=Shidori5417&hide_border=true&theme=transparent" alt="GitHub contribution streak" />
+</p>
+
+---
+
+<p align="center">
+  <i>Building, learning, and improving — one project at a time.</i>
 </p>
