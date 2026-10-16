@@ -1,8 +1,18 @@
-# Hi, I'm Mehmet Karaca (Shidori)
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=200&section=header&text=Mehmet%20Karaca&fontSize=48&fontColor=ffffff&fontAlignY=38&desc=Shidori&descAlignY=58&descSize=20&animation=fadeIn" alt="Mehmet Karaca header" width="100%" />
+</p>
 
-**Full-Stack Developer · Software Engineering Student · Tech Enthusiast**
+<p align="center">
+  <a href="https://github.com/Shidori5417">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&duration=3000&pause=800&color=2C9CDB&center=true&vCenter=true&width=600&lines=Full-Stack+Developer;Software+Engineering+Student;Building+developer+tools+%26+web+apps;Always+learning+something+new" alt="Typing animation" />
+  </a>
+</p>
 
-I'm a developer from Turkey who enjoys building software, exploring new technologies, and solving real-world problems. I'm continuously improving my skills in application development, modern frameworks, databases, and system architecture.
+<p align="center">
+  <a href="https://shidori-lab.cengo23434wer56et45r.chatgpt.site"><img src="https://img.shields.io/badge/Portfolio-Shidori%20Lab-2C9CDB?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
+  <a href="mailto:temhemkaraca@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
+  <a href="https://instagram.com/mehmetkrc16_"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" /></a>
+</p>
 
 <p align="center">
   <img src="https://count.getloli.com/get/@Shidori5417?theme=asoul" alt="Profile visitor counter" />
@@ -10,79 +20,58 @@ I'm a developer from Turkey who enjoys building software, exploring new technolo
 
 ---
 
-### About Me
+<table>
+<tr>
+<td width="50%" valign="top">
 
-- 🌐 **Portfolio:** [Shidori Lab](https://shidori-lab.cengo23434wer56et45r.chatgpt.site)
-- 🔭 **Currently working on:** [Context-Switcher](https://github.com/Shidori5417/Context-Switcher)
-- 🌱 **Currently learning:** Modern frameworks, databases, and software architecture
-- 👯 **Open to:** Collaborating on application development and open-source projects
-- 💡 **Interested in:** Modern software, cybersecurity, AI, and developer tools
-- 📂 **Projects:** [Explore my repositories](https://github.com/Shidori5417?tab=repositories)
-- 📫 **Contact:** [temhemkaraca@gmail.com](mailto:temhemkaraca@gmail.com)
+### 🇬🇧 About Me
 
----
+I'm a developer from Turkey who enjoys building software, exploring new technologies, and solving real-world problems.
 
-### Connect With Me
+- 🔭 Working on **[Context-Switcher](https://github.com/Shidori5417/Context-Switcher)**
+- 🌱 Learning modern frameworks, databases & software architecture
+- 💡 Interested in cybersecurity, AI and developer tools
+- 👯 Open to collaborating on open-source projects
+- 📂 [Explore my repositories](https://github.com/Shidori5417?tab=repositories)
 
-<p align="left">
-  <a href="https://github.com/Shidori5417">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-  <a href="https://instagram.com/mehmetkrc16_">
-    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
-  </a>
-  <a href="mailto:temhemkaraca@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-  </a>
-</p>
+</td>
+<td width="50%" valign="top">
 
----
+### 🇹🇷 Hakkımda
 
-### Tech Stack
+Türkiye'den, yazılım geliştirmeyi, yeni teknolojileri keşfetmeyi ve gerçek dünya problemlerine çözüm üretmeyi seven bir geliştiriciyim.
 
-#### Languages
+- 🔭 Şu an **[Context-Switcher](https://github.com/Shidori5417/Context-Switcher)** üzerinde çalışıyorum
+- 🌱 Modern framework'ler, veritabanları ve yazılım mimarisi öğreniyorum
+- 💡 Siber güvenlik, yapay zekâ ve geliştirici araçlarıyla ilgileniyorum
+- 👯 Açık kaynak projelerde iş birliğine açığım
+- 📂 [Repolarıma göz at](https://github.com/Shidori5417?tab=repositories)
 
-<p>
-  <img src="https://skillicons.dev/icons?i=js,ts,python,cs,cpp,go,rust,java,kotlin,dart,php,swift,bash" alt="Programming languages" />
-</p>
-
-#### Frontend Development
-
-<p>
-  <img src="https://skillicons.dev/icons?i=html,css,react,nextjs,vue,tailwind,bootstrap,webpack" alt="Frontend technologies" />
-</p>
-
-#### Backend Development & Frameworks
-
-<p>
-  <img src="https://skillicons.dev/icons?i=nodejs,express,nestjs,django,dotnet,graphql" alt="Backend technologies" />
-</p>
-
-#### Databases & Messaging
-
-<p>
-  <img src="https://skillicons.dev/icons?i=postgres,mongodb,mysql,sqlite,redis,firebase,rabbitmq" alt="Databases and messaging" />
-</p>
-
-#### DevOps, Cloud & Infrastructure
-
-<p>
-  <img src="https://skillicons.dev/icons?i=linux,docker,kubernetes,nginx,aws,gcp,git,github,arduino" alt="DevOps and infrastructure" />
-</p>
-
-#### Mobile, Desktop & AI
-
-<p>
-  <img src="https://skillicons.dev/icons?i=flutter,android,electron,pytorch,tensorflow,opencv,unreal" alt="Mobile, desktop, AI, and graphics technologies" />
-</p>
+</td>
+</tr>
+</table>
 
 ---
 
-### GitHub Statistics
+### 🛠️ Tech Stack
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=Shidori5417&show_icons=true&hide_border=true&theme=transparent&rank_icon=github" alt="GitHub statistics" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Shidori5417&layout=compact&hide_border=true&theme=transparent" alt="Most used languages" />
+  <img src="https://skillicons.dev/icons?i=ts,js,python,cs,java&theme=dark" alt="Languages" /><br/>
+  <img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,nodejs,express,dotnet&theme=dark" alt="Frameworks" /><br/>
+  <img src="https://skillicons.dev/icons?i=postgres,mongodb,mysql,docker,linux,git&theme=dark" alt="Databases and tools" />
+</p>
+
+---
+
+### 📊 GitHub Stats
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Shidori5417/Shidori5417/main/profile-summary-card-output/github_dark/0-profile-details.svg" alt="Profile details" width="100%" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Shidori5417/Shidori5417/main/profile-summary-card-output/github_dark/3-stats.svg" alt="GitHub stats" height="165" />
+  <img src="https://raw.githubusercontent.com/Shidori5417/Shidori5417/main/profile-summary-card-output/github_dark/1-repos-per-language.svg" alt="Top languages" height="165" />
 </p>
 
 <p align="center">
@@ -92,5 +81,10 @@ I'm a developer from Turkey who enjoys building software, exploring new technolo
 ---
 
 <p align="center">
-  <i>Building, learning, and improving — one project at a time.</i>
+  <i>Building, learning, and improving — one project at a time.</i><br/>
+  <i>Üretmeye, öğrenmeye ve gelişmeye devam — her seferinde bir proje.</i>
+</p>
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2c5364,50:203a43,100:0f2027&height=100&section=footer" alt="Footer" width="100%" />
 </p>
