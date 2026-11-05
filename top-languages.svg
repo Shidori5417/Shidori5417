@@ -1,40 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
-  <title id="title">Top Programming Languages</title>
-  <desc id="desc">Programming languages ranked by repository coverage. This is an approximate ordering and does not show percentages.</desc>
-  <defs>
-    <linearGradient id="bar" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0%" stop-color="#2563eb"/>
-      <stop offset="100%" stop-color="#60a5fa"/>
-    </linearGradient>
-  </defs>
-  <rect x="1" y="1" width="718" height="358" rx="18" fill="#0d1117" stroke="#30363d"/>
-  <text x="34" y="42" fill="#e6edf3" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="1.5">TOP PROGRAMMING LANGUAGES</text>
-  <text x="34" y="66" fill="#8b949e" font-family="Arial, Helvetica, sans-serif" font-size="12">Ranked by repository coverage · no percentage claims</text>
-  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#c9d1d9">
-    <text x="34" y="111">Python</text>
-    <text x="34" y="151">TypeScript</text>
-    <text x="34" y="191">Java</text>
-    <text x="34" y="231">Rust</text>
-    <text x="34" y="271">JavaScript</text>
-    <text x="34" y="311">Dart</text>
-    <text x="34" y="351">Go</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" role="img" aria-labelledby="title desc">
+  <title id="title">Programming language breakdown</title>
+  <desc id="desc">Programming languages ranked by the number of repositories using each as the primary language. No percentages are shown.</desc>
+  <rect x="0.5" y="0.5" width="899" height="299" fill="#0d1117" stroke="#30363d"/>
+  <text x="28" y="30" fill="#e6edf3" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="1.7">LANGUAGE BREAKDOWN</text>
+  <text x="872" y="30" text-anchor="end" fill="#8b949e" font-family="Arial, Helvetica, sans-serif" font-size="10" letter-spacing="0.7">RANKED BY REPOSITORY COUNT</text>
+  <line x1="28" y1="45" x2="872" y2="45" stroke="#30363d" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12">
+    <g fill="#c9d1d9">
+      <text x="28" y="78">Python</text>
+      <text x="28" y="108">TypeScript</text>
+      <text x="28" y="138">Java</text>
+      <text x="28" y="168">Rust</text>
+      <text x="28" y="198">JavaScript</text>
+      <text x="28" y="228">Dart</text>
+      <text x="28" y="258">Go</text>
+    </g>
+    <g fill="#8b949e" text-anchor="end" font-size="10">
+      <text x="872" y="78">4 repos</text>
+      <text x="872" y="108">3 repos</text>
+      <text x="872" y="138">2 repos</text>
+      <text x="872" y="168">2 repos</text>
+      <text x="872" y="198">1 repo</text>
+      <text x="872" y="228">1 repo</text>
+      <text x="872" y="258">1 repo</text>
+    </g>
   </g>
   <g fill="#21262d">
-    <rect x="160" y="95" width="510" height="12" rx="6"/>
-    <rect x="160" y="135" width="510" height="12" rx="6"/>
-    <rect x="160" y="175" width="510" height="12" rx="6"/>
-    <rect x="160" y="215" width="510" height="12" rx="6"/>
-    <rect x="160" y="255" width="510" height="12" rx="6"/>
-    <rect x="160" y="295" width="510" height="12" rx="6"/>
-    <rect x="160" y="335" width="510" height="12" rx="6"/>
+    <rect x="150" y="69" width="650" height="4"/>
+    <rect x="150" y="99" width="650" height="4"/>
+    <rect x="150" y="129" width="650" height="4"/>
+    <rect x="150" y="159" width="650" height="4"/>
+    <rect x="150" y="189" width="650" height="4"/>
+    <rect x="150" y="219" width="650" height="4"/>
+    <rect x="150" y="249" width="650" height="4"/>
   </g>
-  <g fill="url(#bar)">
-    <rect x="160" y="95" width="390" height="12" rx="6"/>
-    <rect x="160" y="135" width="292" height="12" rx="6"/>
-    <rect x="160" y="175" width="195" height="12" rx="6"/>
-    <rect x="160" y="215" width="195" height="12" rx="6"/>
-    <rect x="160" y="255" width="98" height="12" rx="6"/>
-    <rect x="160" y="295" width="98" height="12" rx="6"/>
-    <rect x="160" y="335" width="98" height="12" rx="6"/>
+  <g fill="#3b82f6">
+    <rect x="150" y="69" width="260" height="4"/>
+    <rect x="150" y="99" width="195" height="4"/>
+    <rect x="150" y="129" width="130" height="4"/>
+    <rect x="150" y="159" width="130" height="4"/>
+    <rect x="150" y="189" width="65" height="4"/>
+    <rect x="150" y="219" width="65" height="4"/>
+    <rect x="150" y="249" width="65" height="4"/>
   </g>
+  <line x1="28" y1="278" x2="872" y2="278" stroke="#21262d" stroke-width="1"/>
+  <text x="28" y="291" fill="#6e7681" font-family="Arial, Helvetica, sans-serif" font-size="9">Primary language per repository · markup languages excluded · manually maintained snapshot</text>
 </svg>
