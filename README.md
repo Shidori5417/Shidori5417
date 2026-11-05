@@ -16,13 +16,11 @@
 
 ## GitHub Statistics
 
-<div align="center">
+<img width="100%" src="./github-stats.svg" alt="Local GitHub statistics" />
 
-<img height="170" src="https://github-stats-extended.vercel.app/api?username=Shidori5417&show_icons=true&hide_border=true&bg_color=0d1117&title_color=60a5fa&text_color=c9d1d9&icon_color=3b82f6&rank_icon=github" alt="GitHub statistics" />
+## Language Breakdown
 
-<img width="100%" src="./top-languages.svg" alt="Top programming languages, ranked by repository coverage" />
-
-</div>
+<img width="100%" src="./top-languages.svg" alt="Programming languages ranked by repository count" />
 
 ## About
 
