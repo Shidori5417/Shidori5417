@@ -26,10 +26,3 @@
 
 I'm a software development student from Türkiye, focused on learning, building, and improving every day. I enjoy full-stack development, Linux, and open-source software.
 
-## Programming Languages
-
-<div align="center">
-
-<img src="https://skillicons.dev/icons?i=python,ts,java,rust,js,dart,go&theme=dark" alt="Programming language icons" />
-
-</div>
