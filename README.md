@@ -30,6 +30,6 @@ I'm a software development student from Türkiye, focused on learning, building,
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=python,ts,java,rust,html,js,dart,go&theme=dark" alt="Programming language icons" />
+<img src="https://skillicons.dev/icons?i=python,ts,java,rust,js,dart,go&theme=dark" alt="Programming language icons" />
 
 </div>
