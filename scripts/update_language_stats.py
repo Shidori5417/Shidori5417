@@ -71,10 +71,9 @@ def api_get(url: str, token: str) -> tuple[Any, dict[str, str]]:
             headers = {key.lower(): value for key, value in response.headers.items()}
             return payload, headers
     except urllib.error.HTTPError as exc:
-        # Do not print request headers or credentials.
-        detail = exc.read().decode("utf-8", errors="replace")[:300]
+        # Never expose private repository names or API response details in public logs.
         raise RuntimeError(
-            f"GitHub API request failed ({exc.code}) for {url}: {detail}"
+            f"GitHub API request failed ({exc.code}). Check GH_STATS_TOKEN permissions."
         ) from exc
 
 
