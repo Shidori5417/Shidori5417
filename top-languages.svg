@@ -1,32 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="166" viewBox="0 0 900 166" role="img" aria-labelledby="title desc">
-  <title id="title">Programming language breakdown</title>
-  <desc id="desc">A local snapshot of programming languages ranked by repository count. No percentages are shown.</desc>
+  <title id="title">Language breakdown by source-code size</title>
+  <desc id="desc">This card will show GitHub language byte counts after the repository secret is configured.</desc>
   <rect x="0.5" y="0.5" width="899" height="165" fill="#0d1117" stroke="#30363d"/>
   <text x="28" y="30" fill="#e6edf3" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="1.7">LANGUAGE BREAKDOWN</text>
-  <text x="872" y="30" text-anchor="end" fill="#8b949e" font-family="Arial, Helvetica, sans-serif" font-size="10" letter-spacing="0.7">REPOSITORIES BY PRIMARY LANGUAGE</text>
+  <text x="872" y="30" text-anchor="end" fill="#8b949e" font-family="Arial, Helvetica, sans-serif" font-size="10" letter-spacing="0.6">CODE BYTES · AUTOMATED</text>
   <line x1="28" y1="45" x2="872" y2="45" stroke="#30363d" stroke-width="1"/>
-  <line x1="148.57" y1="62" x2="148.57" y2="139" stroke="#30363d" stroke-width="1"/>
-  <line x1="269.14" y1="62" x2="269.14" y2="139" stroke="#30363d" stroke-width="1"/>
-  <line x1="389.71" y1="62" x2="389.71" y2="139" stroke="#30363d" stroke-width="1"/>
-  <line x1="510.29" y1="62" x2="510.29" y2="139" stroke="#30363d" stroke-width="1"/>
-  <line x1="630.86" y1="62" x2="630.86" y2="139" stroke="#30363d" stroke-width="1"/>
-  <line x1="751.43" y1="62" x2="751.43" y2="139" stroke="#30363d" stroke-width="1"/>
-  <g font-family="Arial, Helvetica, sans-serif">
-    <text x="88.29" y="103" text-anchor="middle" fill="#f0f6fc" font-size="30" font-weight="600">4</text>
-    <text x="88.29" y="126" text-anchor="middle" fill="#8b949e" font-size="9" letter-spacing="0.5">PYTHON</text>
-    <text x="208.86" y="103" text-anchor="middle" fill="#f0f6fc" font-size="30" font-weight="600">3</text>
-    <text x="208.86" y="126" text-anchor="middle" fill="#8b949e" font-size="8" letter-spacing="0.5">TYPESCRIPT</text>
-    <text x="329.43" y="103" text-anchor="middle" fill="#f0f6fc" font-size="30" font-weight="600">2</text>
-    <text x="329.43" y="126" text-anchor="middle" fill="#8b949e" font-size="9" letter-spacing="0.5">JAVA</text>
-    <text x="450.00" y="103" text-anchor="middle" fill="#f0f6fc" font-size="30" font-weight="600">2</text>
-    <text x="450.00" y="126" text-anchor="middle" fill="#8b949e" font-size="9" letter-spacing="0.5">RUST</text>
-    <text x="570.57" y="103" text-anchor="middle" fill="#f0f6fc" font-size="30" font-weight="600">1</text>
-    <text x="570.57" y="126" text-anchor="middle" fill="#8b949e" font-size="8" letter-spacing="0.5">JAVASCRIPT</text>
-    <text x="691.14" y="103" text-anchor="middle" fill="#f0f6fc" font-size="30" font-weight="600">1</text>
-    <text x="691.14" y="126" text-anchor="middle" fill="#8b949e" font-size="9" letter-spacing="0.5">DART</text>
-    <text x="811.71" y="103" text-anchor="middle" fill="#f0f6fc" font-size="30" font-weight="600">1</text>
-    <text x="811.71" y="126" text-anchor="middle" fill="#8b949e" font-size="9" letter-spacing="0.5">GO</text>
-  </g>
-  <line x1="28" y1="145" x2="872" y2="145" stroke="#21262d" stroke-width="1"/>
-  <text x="28" y="157" fill="#6e7681" font-family="Arial, Helvetica, sans-serif" font-size="9">PRIMARY LANGUAGE PER REPOSITORY · NO PERCENTAGES</text>
+  <text x="28" y="88" fill="#c9d1d9" font-family="Arial, Helvetica, sans-serif" font-size="13">Waiting for code-level language data.</text>
+  <text x="28" y="111" fill="#8b949e" font-family="Arial, Helvetica, sans-serif" font-size="11">Configure GH_STATS_TOKEN and run the “Update language breakdown” workflow.</text>
+  <line x1="28" y1="137" x2="872" y2="137" stroke="#21262d" stroke-width="1"/>
+  <text x="28" y="153" fill="#6e7681" font-family="Arial, Helvetica, sans-serif" font-size="9">GITHUB LANGUAGE API · AGGREGATED CODE BYTES · NO REPOSITORY NAMES EXPOSED</text>
 </svg>
