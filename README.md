@@ -18,9 +18,9 @@
 
 <div align="center">
 
-<img height="170" src="https://github-readme-stats.vercel.app/api?username=Shidori5417&show_icons=true&hide_border=true&bg_color=0d1117&title_color=60a5fa&text_color=c9d1d9&icon_color=3b82f6&rank_icon=github" alt="GitHub statistics" />
+<img height="170" src="https://github-stats-extended.vercel.app/api?username=Shidori5417&show_icons=true&hide_border=true&bg_color=0d1117&title_color=60a5fa&text_color=c9d1d9&icon_color=3b82f6&rank_icon=github" alt="GitHub statistics" />
 
-<img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Shidori5417&layout=compact&hide_border=true&bg_color=0d1117&title_color=60a5fa&text_color=c9d1d9" alt="Most used languages" />
+<img height="170" src="https://github-stats-extended.vercel.app/api/top-langs/?username=Shidori5417&layout=compact&hide_border=true&bg_color=0d1117&title_color=60a5fa&text_color=c9d1d9" alt="Most used languages" />
 
 </div>
 
