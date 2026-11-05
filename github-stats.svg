@@ -12,10 +12,10 @@
     <text x="28" y="126" fill="#8b949e" font-size="10" letter-spacing="1.1">REPOSITORIES</text>
 
     <text x="344" y="103" fill="#f0f6fc" font-size="34" font-weight="600">1</text>
-    <text x="344" y="126" fill="#8b949e" font-size="10" letter-spacing="1.1">STARS RECEIVED</text>
+    <text x="344" y="126" fill="#8b949e" font-size="10" letter-spacing="1.1">PUBLIC STARS</text>
 
     <text x="624" y="103" fill="#f0f6fc" font-size="34" font-weight="600">0</text>
-    <text x="624" y="126" fill="#8b949e" font-size="10" letter-spacing="1.1">FORKS</text>
+    <text x="624" y="126" fill="#8b949e" font-size="10" letter-spacing="1.1">PUBLIC FORKS</text>
   </g>
   <rect x="28" y="145" width="3" height="8" fill="#3b82f6"/>
   <text x="38" y="152" fill="#8b949e" font-family="Arial, Helvetica, sans-serif" font-size="9">Repository total includes private projects; names and contents are not exposed.</text>
