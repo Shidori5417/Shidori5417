@@ -24,5 +24,5 @@
 
 ## About
 
-I'm a software development student from Türkiye, focused on learning, building, and improving every day. I enjoy full-stack development, Linux, and open-source software.
+Software development student focused on full-stack development, Linux, and open-source software.
 
