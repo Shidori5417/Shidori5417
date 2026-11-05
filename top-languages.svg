@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">Top Programming Languages</title>
+  <desc id="desc">Programming languages ranked by repository coverage. This is an approximate ordering and does not show percentages.</desc>
+  <defs>
+    <linearGradient id="bar" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="718" height="358" rx="18" fill="#0d1117" stroke="#30363d"/>
+  <text x="34" y="42" fill="#e6edf3" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="1.5">TOP PROGRAMMING LANGUAGES</text>
+  <text x="34" y="66" fill="#8b949e" font-family="Arial, Helvetica, sans-serif" font-size="12">Ranked by repository coverage · no percentage claims</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#c9d1d9">
+    <text x="34" y="111">Python</text>
+    <text x="34" y="151">TypeScript</text>
+    <text x="34" y="191">Java</text>
+    <text x="34" y="231">Rust</text>
+    <text x="34" y="271">JavaScript</text>
+    <text x="34" y="311">Dart</text>
+    <text x="34" y="351">Go</text>
+  </g>
+  <g fill="#21262d">
+    <rect x="160" y="95" width="510" height="12" rx="6"/>
+    <rect x="160" y="135" width="510" height="12" rx="6"/>
+    <rect x="160" y="175" width="510" height="12" rx="6"/>
+    <rect x="160" y="215" width="510" height="12" rx="6"/>
+    <rect x="160" y="255" width="510" height="12" rx="6"/>
+    <rect x="160" y="295" width="510" height="12" rx="6"/>
+    <rect x="160" y="335" width="510" height="12" rx="6"/>
+  </g>
+  <g fill="url(#bar)">
+    <rect x="160" y="95" width="390" height="12" rx="6"/>
+    <rect x="160" y="135" width="292" height="12" rx="6"/>
+    <rect x="160" y="175" width="195" height="12" rx="6"/>
+    <rect x="160" y="215" width="195" height="12" rx="6"/>
+    <rect x="160" y="255" width="98" height="12" rx="6"/>
+    <rect x="160" y="295" width="98" height="12" rx="6"/>
+    <rect x="160" y="335" width="98" height="12" rx="6"/>
+  </g>
+</svg>
