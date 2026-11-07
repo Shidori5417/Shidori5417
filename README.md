@@ -20,7 +20,7 @@
 
 ## Language Breakdown
 
-<img width="100%" src="./top-languages.svg" alt="Programming languages ranked by repository count" />
+<img width="100%" src="./top-languages.svg" alt="Programming languages ranked by source-code bytes" />
 
 ## About
 
