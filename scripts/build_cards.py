@@ -253,6 +253,11 @@ def main() -> int:
         raise SystemExit("GH_STATS_TOKEN ya da GITHUB_TOKEN gerekli.")
 
     stats = collect(owner, token)
+    if stats["repos"] == stats["public"]:
+        # Token private repoları görmüyor; eksik veriyle kartları bozma.
+        print("::warning::Token private repoları göremiyor, kartlar güncellenmedi. "
+              "GH_STATS_TOKEN'a tüm repolar için okuma izni ver.")
+        return 0
     for name, t in THEMES.items():
         (OUT / f"overview-{name}.svg").write_text(overview(t, stats), encoding="utf-8")
         (OUT / f"languages-{name}.svg").write_text(languages(t, stats), encoding="utf-8")
