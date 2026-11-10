@@ -1,79 +1,82 @@
-<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/header-dark.svg">
+  <img src="./assets/header-light.svg" width="100%" alt="Shidori — Mehmet Karaca, 17, Türkiye. Rust, Linux, PipeWire, ratatui ve Next.js ile araçlar yapıyorum.">
+</picture>
 
-<img
-  src="https://capsule-render.vercel.app/api?type=rect&color=0:0b1220,50:111827,100:1e3a8a&height=170&section=header&text=Shidori&fontSize=50&fontColor=e5e7eb&fontAlignY=40&desc=Mehmet%20Karaca%20%C2%B7%2017%20%C2%B7%20T%C3%BCrkiye&descSize=15&descColor=93c5fd&descAlignY=68"
-  width="100%"
-  alt="Shidori — Mehmet Karaca"
-/>
+<p align="center">
+  <a href="https://portfolio-one-kappa-cpacyycrck.vercel.app"><img src="https://img.shields.io/badge/portfolyo-ziyaret_et-1e3a8a?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolyo"></a>
+  <img src="https://img.shields.io/badge/CachyOS-Hyprland-1793d1?style=for-the-badge&logo=archlinux&logoColor=white" alt="CachyOS + Hyprland">
+  <img src="https://img.shields.io/badge/shell-fish-4aae47?style=for-the-badge&logo=gnubash&logoColor=white" alt="fish shell">
+</p>
 
-<img
-  src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=17&duration=2600&pause=900&color=60A5FA&center=true&vCenter=true&width=600&lines=Rust+ile+terminal+ara%C3%A7lar%C4%B1+yaz%C4%B1yorum;Linux+%C2%B7+PipeWire+%C2%B7+ratatui;Next.js+%2B+TypeScript+ile+web;7%2F24+%C3%A7al%C4%B1%C5%9Fan+k%C3%BC%C3%A7%C3%BCk+servisler"
-  alt="Ne yapıyorum"
-/>
+### 👋 Hakkımda
 
-[![Portfolyo](https://img.shields.io/badge/portfolyo-siteyi_gez-1e3a8a?style=flat-square&logo=vercel&logoColor=white)](https://portfolio-one-kappa-cpacyycrck.vercel.app)
-[![GitHub](https://img.shields.io/github/followers/Shidori5417?label=takip%C3%A7i&style=flat-square&logo=github&color=111827)](https://github.com/Shidori5417)
+17 yaşında, Türkiye'den bir geliştiriciyim. Günlük olarak CachyOS + Hyprland kullanıyorum, o yüzden yazdığım
+şeylerin çoğu Linux'ta ve terminalde çalışıyor. Son dönemde neredeyse her şeyi **Rust** ile yazıyorum:
+gerçek zamanlı ses işleme, arka planda 7/24 çalışıp haber veren izleme servisleri ve bunlara `ratatui` ile TUI'ler.
+Web tarafında **Next.js + TypeScript**, eskiden de bolca **Java** (Minecraft plugin'leri).
 
-</div>
+- 🔭 Şu an: **MicForge**'u geliştiriyorum, gözcü servislerini VDS'te canlıya alıyorum
+- 💬 Bir projemle ilgili fikrin ya da sorun mu var? İlgili repoda issue açman yeterli
 
-## 👋 Merhaba
-
-17 yaşında, Türkiye'den bir geliştiriciyim. Günlük olarak **CachyOS + Hyprland** kullanıyorum, o yüzden
-yazdığım şeylerin çoğu Linux'ta, terminalde çalışıyor. Son dönemde neredeyse her şeyi **Rust** ile yazıyorum:
-gerçek zamanlı ses işleme, arka planda sessizce çalışıp haber veren izleme servisleri ve bunlara `ratatui` ile TUI'ler.
-Web tarafında **Next.js / TypeScript** kullanıyorum.
-
-## 🛠️ Öne çıkan projeler
+### 🛠️ Öne çıkan projeler
 
 <table>
   <tr>
     <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/micforge">
-        <img src="https://raw.githubusercontent.com/Shidori5417/micforge/main/docs/screenshots/tr/eq.png" alt="MicForge EQ ekranı" width="100%">
-      </a>
-      <h3><a href="https://github.com/Shidori5417/micforge">🎙️ MicForge</a></h3>
-      <p>Terminalde gerçek zamanlı mikrofon işleme stüdyosu. Gürültü bastırma, 16 bantlı EQ, compressor, limiter ve efektler; çıktısı Discord/OBS'te sanal mikrofon olarak görünür. ~5–7 ms gecikme.</p>
-      <p><code>Rust</code> <code>PipeWire</code> <code>ratatui</code> <code>DSP</code></p>
+      <a href="https://github.com/Shidori5417/micforge"><img src="https://raw.githubusercontent.com/Shidori5417/micforge/main/docs/screenshots/tr/eq.png" alt="MicForge EQ ekranı" width="100%"></a>
+      <h4><a href="https://github.com/Shidori5417/micforge">🎙️ MicForge</a></h4>
+      Terminalde gerçek zamanlı mikrofon işleme stüdyosu: gürültü bastırma, 16 bantlı EQ, compressor, limiter, efektler. Çıktısı Discord/OBS'te sanal mikrofon olarak görünür, gecikme ~5–7 ms.
+      <br><br>
+      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
+      <img src="https://img.shields.io/badge/PipeWire-4b8bbe?style=flat-square" alt="PipeWire">
+      <img src="https://img.shields.io/badge/ratatui-8a2be2?style=flat-square" alt="ratatui">
     </td>
     <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/DomainSniper">
-        <img src="https://raw.githubusercontent.com/Shidori5417/DomainSniper/main/docs/screenshots/list.png" alt="DomainGözcü domain listesi" width="100%">
-      </a>
-      <h3><a href="https://github.com/Shidori5417/DomainSniper">🌐 DomainGözcü</a></h3>
-      <p>7/24 çalışan tek binary'lik domain izleme servisi. DNS → RDAP → WHOIS ile durumu tespit eder, değişince Discord ve Telegram'a bildirim atar. Geçici hatalar durumu bozmaz.</p>
-      <p><code>Rust</code> <code>tokio</code> <code>RDAP/WHOIS</code> <code>SQLite</code></p>
+      <a href="https://github.com/Shidori5417/DomainSniper"><img src="https://raw.githubusercontent.com/Shidori5417/DomainSniper/main/docs/screenshots/list.png" alt="DomainGözcü domain listesi" width="100%"></a>
+      <h4><a href="https://github.com/Shidori5417/DomainSniper">🌐 DomainGözcü</a></h4>
+      7/24 çalışan tek binary'lik domain izleme servisi. DNS → RDAP → WHOIS ile durumu tespit eder, değişince Discord ve Telegram'a haber verir. Geçici hatalar durumu bozmaz.
+      <br><br>
+      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
+      <img src="https://img.shields.io/badge/tokio-555?style=flat-square" alt="tokio">
+      <img src="https://img.shields.io/badge/SQLite-003b57?style=flat-square&logo=sqlite" alt="SQLite">
     </td>
     <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/VanityGozcu">
-        <img src="https://raw.githubusercontent.com/Shidori5417/VanityGozcu/main/docs/tui.png" alt="VanityGözcü TUI" width="100%">
-      </a>
-      <h3><a href="https://github.com/Shidori5417/VanityGozcu">🔗 VanityGözcü</a></h3>
-      <p>Discord vanity URL'lerini izleyip boşalınca webhook ve Telegram ile haber veren araç. Headless daemon olarak çalışır, istediğin zaman TUI ile bağlanırsın.</p>
-      <p><code>Rust</code> <code>ratatui</code> <code>systemd</code> <code>Unix socket</code></p>
+      <a href="https://github.com/Shidori5417/VanityGozcu"><img src="https://raw.githubusercontent.com/Shidori5417/VanityGozcu/main/docs/tui.png" alt="VanityGözcü TUI" width="100%"></a>
+      <h4><a href="https://github.com/Shidori5417/VanityGozcu">🔗 VanityGözcü</a></h4>
+      Discord vanity URL'lerini izleyip boşalınca webhook ve Telegram ile haber veren araç. systemd altında daemon olarak çalışır, istediğin an TUI ile bağlanırsın.
+      <br><br>
+      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
+      <img src="https://img.shields.io/badge/ratatui-8a2be2?style=flat-square" alt="ratatui">
+      <img src="https://img.shields.io/badge/systemd-30d475?style=flat-square" alt="systemd">
     </td>
   </tr>
 </table>
 
-Bunların yanında üzerinde çalıştığım (şimdilik private) projeler de var: kişisel **portfolyo sitem** (Next.js),
-Minecraft için **Java plugin'leri**, bir **Discord botu** ve Flutter + NestJS ile konum tabanlı bir sosyal ağ denemesi.
+<sub>Bunların dışında private olarak geliştirdiğim projeler de var: portfolyo sitem (Next.js), Minecraft plugin paketi (Java), bir Discord botu (TypeScript) ve Flutter + NestJS ile konum tabanlı bir sosyal ağ denemesi.</sub>
 
-## 🧰 Kullandıklarım
+### 🧰 Kullandıklarım
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=rust,ts,nextjs,react,tailwind,nestjs,python,java,go,flutter&theme=dark" alt="Diller ve framework'ler" />
-  <br>
-  <img src="https://skillicons.dev/icons?i=linux,arch,bash,git,github,vercel&theme=dark" alt="Araçlar" />
+<p>
+  <img src="https://skillicons.dev/icons?i=rust,ts,nextjs,react,tailwind,nestjs,python,java,go,flutter,linux,arch,bash,git,vercel&perline=15" alt="Rust, TypeScript, Next.js, React, Tailwind, NestJS, Python, Java, Go, Flutter, Linux, Arch, Bash, Git, Vercel">
 </p>
 
-## 📊 Dil dağılımı
+### 📊 İstatistikler
 
-<img width="100%" src="./top-languages.svg" alt="Kodlarımın dillere göre dağılımı (bayt)" />
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/overview-dark.svg">
+    <img src="./assets/overview-light.svg" width="49%" alt="Genel bakış: repo, katkı ve commit sayıları">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/languages-dark.svg">
+    <img src="./assets/languages-light.svg" width="49%" alt="En çok kullandığım diller">
+  </picture>
+</p>
 
-## 📫 Ulaş
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Shidori5417/Shidori5417/output/snake-dark.svg">
+  <img src="https://raw.githubusercontent.com/Shidori5417/Shidori5417/output/snake-light.svg" width="100%" alt="Katkı grafiğini yiyen yılan animasyonu">
+</picture>
 
-Projelerden biri hakkında sorun ya da fikrin varsa ilgili repoda **issue** açabilirsin. Diğer işlerime
-[portfolyo sitemden](https://portfolio-one-kappa-cpacyycrck.vercel.app) bakabilirsin.
-
-<div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:1e3a8a,50:111827,100:0b1220&height=40&section=footer" width="100%" alt="" />
-</div>
+<sub>Kartlar bu repodaki <a href="./scripts/build_cards.py"><code>scripts/build_cards.py</code></a> ile her gün yeniden üretilir; private repoların yalnızca toplamları kullanılır, adları hiçbir yerde görünmez.</sub>
