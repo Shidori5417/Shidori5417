@@ -51,6 +51,32 @@ Web tarafında **Next.js + TypeScript**, eskiden de bolca **Java** (Minecraft pl
       <img src="https://img.shields.io/badge/systemd-30d475?style=flat-square" alt="systemd">
     </td>
   </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <a href="https://github.com/Shidori5417/pakiz"><img src="https://raw.githubusercontent.com/Shidori5417/pakiz/master/docs/img/main.svg" alt="pakiz ana ekran" width="100%"></a>
+      <h4><a href="https://github.com/Shidori5417/pakiz">📡 pakiz</a></h4>
+      Terminalde libpcap'siz, Wireshark benzeri paket analizörü. <code>AF_PACKET</code> + <code>TPACKET_V3</code> ile yakalar; pcap/pcapng, Wireshark sözdizimli display filter, DNS/TLS/QUIC/HTTP çözümleme.
+      <br><br>
+      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
+      <img src="https://img.shields.io/badge/ratatui-8a2be2?style=flat-square" alt="ratatui">
+    </td>
+    <td width="33%" valign="top">
+      <a href="https://github.com/Shidori5417/vuln-stack"><img src="https://raw.githubusercontent.com/Shidori5417/vuln-stack/main/docs/screenshots/home.png" alt="VulnStack ana sayfa" width="100%"></a>
+      <h4><a href="https://github.com/Shidori5417/vuln-stack">🛡️ VulnStack</a></h4>
+      Lock dosyalarından bağımlılıkların bilinen açıklarını (CVE/GHSA) bulan CLI + web uygulaması. 11 ekosistem, bağımlılık zinciri ve açığı kapatan en düşük sürüm.
+      <br><br>
+      <img src="https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+      <img src="https://img.shields.io/badge/Next.js-000?style=flat-square&logo=nextdotjs" alt="Next.js">
+    </td>
+    <td width="33%" valign="top">
+      <a href="https://github.com/Shidori5417/helios-agent"><img src="https://raw.githubusercontent.com/Shidori5417/helios-agent/main/docs/screenshots/cli.png" alt="helios CLI" width="100%"></a>
+      <h4><a href="https://github.com/Shidori5417/helios-agent">☀️ Helios</a></h4>
+      Rust ile yazılmış, sağlayıcıdan bağımsız terminal kodlama ajanı: izinli araçlar, ratatui TUI, SQLite oturumlar, MCP/LSP ve imzalı plugin desteği.
+      <br><br>
+      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
+      <img src="https://img.shields.io/badge/SQLite-003b57?style=flat-square&logo=sqlite" alt="SQLite">
+    </td>
+  </tr>
 </table>
 
 <sub>Bunların dışında private olarak geliştirdiğim projeler de var: portfolyo sitem (Next.js), Minecraft plugin paketi (Java), bir Discord botu (TypeScript) ve Flutter + NestJS ile konum tabanlı bir sosyal ağ denemesi.</sub>
