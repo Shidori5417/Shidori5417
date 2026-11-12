@@ -4,7 +4,7 @@
 </picture>
 
 <p align="center">
-  <a href="https://portfolio-one-kappa-cpacyycrck.vercel.app"><img src="https://img.shields.io/badge/portfolyo-ziyaret_et-1e3a8a?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolyo"></a>
+  <a href="https://mehmetkaraca.vercel.app"><img src="https://img.shields.io/badge/portfolyo-ziyaret_et-1e3a8a?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolyo"></a>
   <img src="https://img.shields.io/badge/CachyOS-Hyprland-1793d1?style=for-the-badge&logo=archlinux&logoColor=white" alt="CachyOS + Hyprland">
   <img src="https://img.shields.io/badge/shell-fish-4aae47?style=for-the-badge&logo=gnubash&logoColor=white" alt="fish shell">
 </p>
