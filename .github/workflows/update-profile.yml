@@ -49,22 +49,3 @@ jobs:
           git commit -m "chore: profil kartlarını güncelle"
           git pull --rebase
           git push
-
-  snake:
-    name: Katkı yılanı
-    runs-on: ubuntu-latest
-    steps:
-      - uses: Platane/snk/svg-only@v3
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            dist/snake-dark.svg?palette=github-dark&color_snake=#58a6ff
-            dist/snake-light.svg?palette=github-light&color_snake=#0969da
-
-      - uses: crazy-max/ghaction-github-pages@v4
-        with:
-          target_branch: output
-          build_dir: dist
-          commit_message: "chore: katkı yılanını güncelle"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

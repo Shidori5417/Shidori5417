@@ -1,108 +1,75 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/header-dark.svg">
-  <img src="./assets/header-light.svg" width="100%" alt="Shidori — Mehmet Karaca, 17, Türkiye. Rust, Linux, PipeWire, ratatui ve Next.js ile araçlar yapıyorum.">
-</picture>
+# Mehmet Karaca
 
-<p align="center">
-  <a href="https://mehmetkaraca.vercel.app"><img src="https://img.shields.io/badge/portfolyo-ziyaret_et-1e3a8a?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolyo"></a>
-  <img src="https://img.shields.io/badge/CachyOS-Hyprland-1793d1?style=for-the-badge&logo=archlinux&logoColor=white" alt="CachyOS + Hyprland">
-  <img src="https://img.shields.io/badge/shell-fish-4aae47?style=for-the-badge&logo=gnubash&logoColor=white" alt="fish shell">
-</p>
+**17 y/o dev from Turkey. I build Rust tools for Linux and the terminal: audio, networking, TUIs.**
 
-### 👋 Hakkımda
+17 yaşında, Türkiye'den bir geliştiriciyim. Linux ve terminal için Rust araçları yazıyorum.
 
-17 yaşında, Türkiye'den bir geliştiriciyim. Günlük olarak CachyOS + Hyprland kullanıyorum, o yüzden yazdığım
-şeylerin çoğu Linux'ta ve terminalde çalışıyor. Son dönemde neredeyse her şeyi **Rust** ile yazıyorum:
-gerçek zamanlı ses işleme, arka planda 7/24 çalışıp haber veren izleme servisleri ve bunlara `ratatui` ile TUI'ler.
-Web tarafında **Next.js + TypeScript**, eskiden de bolca **Java** (Minecraft plugin'leri).
+[Portfolio](https://mehmetkaraca.vercel.app) · [Email](mailto:karacamemo1@gmail.com)
 
-- 🔭 Şu an: **MicForge**'u geliştiriyorum, gözcü servislerini VDS'te canlıya alıyorum
-- 💬 Bir projemle ilgili fikrin ya da sorun mu var? İlgili repoda issue açman yeterli
-
-### 🛠️ Öne çıkan projeler
+## Featured
 
 <table>
   <tr>
-    <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/micforge"><img src="https://raw.githubusercontent.com/Shidori5417/micforge/main/docs/screenshots/tr/eq.png" alt="MicForge EQ ekranı" width="100%"></a>
-      <h4><a href="https://github.com/Shidori5417/micforge">🎙️ MicForge</a></h4>
-      Terminalde gerçek zamanlı mikrofon işleme stüdyosu: gürültü bastırma, 16 bantlı EQ, compressor, limiter, efektler. Çıktısı Discord/OBS'te sanal mikrofon olarak görünür, gecikme ~5–7 ms.
-      <br><br>
-      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
-      <img src="https://img.shields.io/badge/PipeWire-4b8bbe?style=flat-square" alt="PipeWire">
-      <img src="https://img.shields.io/badge/ratatui-8a2be2?style=flat-square" alt="ratatui">
+    <td width="50%" valign="top">
+      <a href="https://github.com/Shidori5417/vuln-stack"><img src="https://raw.githubusercontent.com/Shidori5417/vuln-stack/main/docs/screenshots/home.png" alt="vuln-stack home page" width="100%"></a>
+      <br><b><a href="https://github.com/Shidori5417/vuln-stack">vuln-stack</a></b><br>
+      Finds known CVE/GHSA vulnerabilities in your exact dependency versions from lock files (CLI + web app, 11 ecosystems).<br>
+      <sub>TypeScript · Next.js · OSV.dev</sub>
     </td>
-    <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/DomainSniper"><img src="https://raw.githubusercontent.com/Shidori5417/DomainSniper/main/docs/screenshots/list.png" alt="DomainGözcü domain listesi" width="100%"></a>
-      <h4><a href="https://github.com/Shidori5417/DomainSniper">🌐 DomainGözcü</a></h4>
-      7/24 çalışan tek binary'lik domain izleme servisi. DNS → RDAP → WHOIS ile durumu tespit eder, değişince Discord ve Telegram'a haber verir. Geçici hatalar durumu bozmaz.
-      <br><br>
-      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
-      <img src="https://img.shields.io/badge/tokio-555?style=flat-square" alt="tokio">
-      <img src="https://img.shields.io/badge/SQLite-003b57?style=flat-square&logo=sqlite" alt="SQLite">
-    </td>
-    <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/VanityGozcu"><img src="https://raw.githubusercontent.com/Shidori5417/VanityGozcu/main/docs/tui.png" alt="VanityGözcü TUI" width="100%"></a>
-      <h4><a href="https://github.com/Shidori5417/VanityGozcu">🔗 VanityGözcü</a></h4>
-      Discord vanity URL'lerini izleyip boşalınca webhook ve Telegram ile haber veren araç. systemd altında daemon olarak çalışır, istediğin an TUI ile bağlanırsın.
-      <br><br>
-      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
-      <img src="https://img.shields.io/badge/ratatui-8a2be2?style=flat-square" alt="ratatui">
-      <img src="https://img.shields.io/badge/systemd-30d475?style=flat-square" alt="systemd">
+    <td width="50%" valign="top">
+      <a href="https://github.com/Shidori5417/nobetci"><img src="https://raw.githubusercontent.com/Shidori5417/nobetci/main/assets/overview.png" alt="nobetci overview screen" width="100%"></a>
+      <br><b><a href="https://github.com/Shidori5417/nobetci">nobetci</a></b><br>
+      Agentless multi-server Linux monitoring TUI over SSH.<br>
+      <sub>Rust · ratatui · SSH</sub>
     </td>
   </tr>
   <tr>
-    <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/pakiz"><img src="https://raw.githubusercontent.com/Shidori5417/pakiz/master/docs/img/main.svg" alt="pakiz ana ekran" width="100%"></a>
-      <h4><a href="https://github.com/Shidori5417/pakiz">📡 pakiz</a></h4>
-      Terminalde libpcap'siz, Wireshark benzeri paket analizörü. <code>AF_PACKET</code> + <code>TPACKET_V3</code> ile yakalar; pcap/pcapng, Wireshark sözdizimli display filter, DNS/TLS/QUIC/HTTP çözümleme.
-      <br><br>
-      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
-      <img src="https://img.shields.io/badge/ratatui-8a2be2?style=flat-square" alt="ratatui">
+    <td width="50%" valign="top">
+      <a href="https://github.com/Shidori5417/micforge"><img src="https://raw.githubusercontent.com/Shidori5417/micforge/main/docs/screenshots/tr/eq.png" alt="micforge EQ screen" width="100%"></a>
+      <br><b><a href="https://github.com/Shidori5417/micforge">micforge</a></b><br>
+      Real-time microphone processing in the terminal: noise suppression, 16-band EQ, compressor, virtual mic output.<br>
+      <sub>Rust · PipeWire · ratatui</sub>
     </td>
-    <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/vuln-stack"><img src="https://raw.githubusercontent.com/Shidori5417/vuln-stack/main/docs/screenshots/home.png" alt="VulnStack ana sayfa" width="100%"></a>
-      <h4><a href="https://github.com/Shidori5417/vuln-stack">🛡️ VulnStack</a></h4>
-      Lock dosyalarından bağımlılıkların bilinen açıklarını (CVE/GHSA) bulan CLI + web uygulaması. 11 ekosistem, bağımlılık zinciri ve açığı kapatan en düşük sürüm.
-      <br><br>
-      <img src="https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
-      <img src="https://img.shields.io/badge/Next.js-000?style=flat-square&logo=nextdotjs" alt="Next.js">
-    </td>
-    <td width="33%" valign="top">
-      <a href="https://github.com/Shidori5417/helios-agent"><img src="https://raw.githubusercontent.com/Shidori5417/helios-agent/main/docs/screenshots/cli.png" alt="helios CLI" width="100%"></a>
-      <h4><a href="https://github.com/Shidori5417/helios-agent">☀️ Helios</a></h4>
-      Rust ile yazılmış, sağlayıcıdan bağımsız terminal kodlama ajanı: izinli araçlar, ratatui TUI, SQLite oturumlar, MCP/LSP ve imzalı plugin desteği.
-      <br><br>
-      <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust" alt="Rust">
-      <img src="https://img.shields.io/badge/SQLite-003b57?style=flat-square&logo=sqlite" alt="SQLite">
+    <td width="50%" valign="top">
+      <a href="https://github.com/Shidori5417/pakiz"><img src="https://raw.githubusercontent.com/Shidori5417/pakiz/master/docs/img/main.svg" alt="pakiz main screen" width="100%"></a>
+      <br><b><a href="https://github.com/Shidori5417/pakiz">pakiz</a></b><br>
+      Wireshark-like packet analyzer for the terminal, without libpcap.<br>
+      <sub>Rust · AF_PACKET · ratatui</sub>
     </td>
   </tr>
 </table>
 
-<sub>Bunların dışında private olarak geliştirdiğim projeler de var: portfolyo sitem (Next.js), Minecraft plugin paketi (Java), bir Discord botu (TypeScript) ve Flutter + NestJS ile konum tabanlı bir sosyal ağ denemesi.</sub>
+## More
 
-### 🧰 Kullandıklarım
+- [helios-agent](https://github.com/Shidori5417/helios-agent): provider-neutral terminal coding agent in Rust (permission-checked tools, ratatui TUI, MCP/LSP)
+- [DomainSniper](https://github.com/Shidori5417/DomainSniper) (DomainGözcü): 24/7 domain status monitor (DNS/RDAP/WHOIS) with Discord/Telegram alerts, in Rust
+- [micctl](https://github.com/Shidori5417/micctl): PipeWire microphone DSP, soundboard and FX, CLI/TUI in Rust
+- [Context-Switcher](https://github.com/Shidori5417/Context-Switcher): switch work modes with one command (processes, window layout, browser, audio), Python CLI/TUI
+- [ExifGhost](https://github.com/Shidori5417/ExifGhost): desktop app that strips metadata from photos, audio and video locally, Python
 
-<p>
-  <img src="https://skillicons.dev/icons?i=rust,ts,nextjs,react,tailwind,nestjs,python,java,go,flutter,linux,arch,bash,git,vercel&perline=15" alt="Rust, TypeScript, Next.js, React, Tailwind, NestJS, Python, Java, Go, Flutter, Linux, Arch, Bash, Git, Vercel">
-</p>
+## Now
 
-### 📊 İstatistikler
+- Building micforge: real-time mic processing on PipeWire
+- Polishing nobetci and vuln-stack
+
+## Stack
+
+Rust · TypeScript/Next.js · Python · Java · Linux (Arch/Hyprland)
+
+<details>
+<summary>GitHub stats</summary>
 
 <p>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/overview-dark.svg">
-    <img src="./assets/overview-light.svg" width="49%" alt="Genel bakış: repo, katkı ve commit sayıları">
+    <img src="./assets/overview-light.svg" width="49%" alt="Overview: repo, contribution and commit counts">
   </picture>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/languages-dark.svg">
-    <img src="./assets/languages-light.svg" width="49%" alt="En çok kullandığım diller">
+    <img src="./assets/languages-light.svg" width="49%" alt="Most used languages">
   </picture>
 </p>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Shidori5417/Shidori5417/output/snake-dark.svg">
-  <img src="https://raw.githubusercontent.com/Shidori5417/Shidori5417/output/snake-light.svg" width="100%" alt="Katkı grafiğini yiyen yılan animasyonu">
-</picture>
+<sub>Cards are regenerated daily by <a href="./scripts/build_cards.py"><code>scripts/build_cards.py</code></a>; only totals of private repos are counted, names are never shown.</sub>
 
-<sub>Kartlar bu repodaki <a href="./scripts/build_cards.py"><code>scripts/build_cards.py</code></a> ile her gün yeniden üretilir; private repoların yalnızca toplamları kullanılır, adları hiçbir yerde görünmez.</sub>
+</details>
