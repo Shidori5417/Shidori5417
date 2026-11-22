@@ -41,16 +41,20 @@
 
 ## More
 
+- [proxyforge](https://github.com/Shidori5417/proxyforge): fast, concurrent proxy checker for HTTP/HTTPS/SOCKS4/SOCKS5 with a live TUI dashboard, GeoIP and a rotating proxy server, in Rust
+- [arctop](https://github.com/Shidori5417/arctop): live terminal monitor for Intel Arc GPUs (frequency, power, engine load, per-process GPU/VRAM), no root needed, in Rust
 - [helios-agent](https://github.com/Shidori5417/helios-agent): provider-neutral terminal coding agent in Rust (permission-checked tools, ratatui TUI, MCP/LSP)
 - [DomainSniper](https://github.com/Shidori5417/DomainSniper) (DomainGözcü): 24/7 domain status monitor (DNS/RDAP/WHOIS) with Discord/Telegram alerts, in Rust
-- [micctl](https://github.com/Shidori5417/micctl): PipeWire microphone DSP, soundboard and FX, CLI/TUI in Rust
+- [VanityGozcu](https://github.com/Shidori5417/VanityGozcu): Discord vanity URL monitor with a ratatui TUI and Discord/Telegram notifications, in Rust
 - [Context-Switcher](https://github.com/Shidori5417/Context-Switcher): switch work modes with one command (processes, window layout, browser, audio), Python CLI/TUI
 - [ExifGhost](https://github.com/Shidori5417/ExifGhost): desktop app that strips metadata from photos, audio and video locally, Python
+- [micctl](https://github.com/Shidori5417/micctl): PipeWire mic DSP and soundboard CLI/TUI, the predecessor of micforge
 
 ## Now
 
-- Building micforge: real-time mic processing on PipeWire
-- Polishing nobetci and vuln-stack
+- Shipping proxyforge v0.3 and arctop v0.1
+- Building digcord, a terminal Discord client in Rust (early stage)
+- Polishing micforge, nobetci and vuln-stack
 
 ## Stack
 
