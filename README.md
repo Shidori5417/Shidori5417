@@ -52,7 +52,7 @@
 
 ## Now
 
-- Shipping proxyforge v0.3 and arctop v0.1
+- proxyforge v0.3 is out; preparing the first arctop release (v0.1)
 - Building digcord, a terminal Discord client in Rust (early stage)
 - Polishing micforge, nobetci and vuln-stack
 
