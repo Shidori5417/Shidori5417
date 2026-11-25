@@ -27,6 +27,7 @@ featured:
 # Aşağıdakiler isteğe bağlı geçersiz kılmalardır; yoksa GitHub açıklaması kullanılır.
 # Durum ipucu (" · on hold" / " · prototype" / " · maintenance") status.yml'den gelir, buraya yazılmaz.
 blurbs:
+  digcord: "terminal Discord client with a ratatui TUI, in Rust (early stage)"
   proxyforge: "fast, concurrent proxy checker for HTTP/HTTPS/SOCKS4/SOCKS5 with a live TUI dashboard, GeoIP and a rotating proxy server, in Rust"
   arctop: "live terminal monitor for Intel Arc GPUs (frequency, power, engine load, per-process GPU/VRAM), no root needed, in Rust"
   helios-agent: "provider-neutral terminal coding agent in Rust (permission-checked tools, ratatui TUI, MCP/LSP)"

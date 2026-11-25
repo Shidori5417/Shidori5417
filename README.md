@@ -50,7 +50,7 @@
 - [VanityGozcu](https://github.com/Shidori5417/VanityGozcu): Discord vanity URL monitor with a ratatui TUI and Discord/Telegram notifications, in Rust · maintenance
 - [Context-Switcher](https://github.com/Shidori5417/Context-Switcher): switch work modes with one command (processes, window layout, browser, audio), Python CLI/TUI · maintenance
 - [ExifGhost](https://github.com/Shidori5417/ExifGhost): desktop app that strips metadata from photos, audio and video locally, Python · maintenance
-- [digcord](https://github.com/Shidori5417/digcord): terminal (TUI) Discord client written in Rust — early stage, ratatui · on hold
+- [digcord](https://github.com/Shidori5417/digcord): terminal Discord client with a ratatui TUI, in Rust (early stage) · on hold
 <!-- MORE:END -->
 
 ## Now
