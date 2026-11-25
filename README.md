@@ -52,9 +52,11 @@
 
 ## Now
 
-- proxyforge v0.3 is out; preparing the first arctop release (v0.1)
-- Building digcord, a terminal Discord client in Rust (early stage)
-- Polishing micforge, nobetci and vuln-stack
+- Working on [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): a Rust traffic shaper that throttles background apps while Discord/Zoom are running; Linux build fixed, config hot reload and IPC hardening done, packet shaping still experimental
+- arctop: TUI v2 is done, preparing the first release (v0.1)
+- proxyforge v0.3 is out (TUI settings panel, re-run keys)
+- Went through every public repo: CI, clippy and bug fixes, install docs
+- digcord, a terminal Discord client in Rust, is on hold after the initial skeleton
 
 ## Stack
 
