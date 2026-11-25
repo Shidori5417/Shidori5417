@@ -30,6 +30,8 @@ def entry(**kw):
         "note": None, "stars": 0, "archived": False, "pushedAt": "2026-11-25T00:00:00Z",
         "lastWorkAt": None, "activityScore": 0.0, "latestRelease": None,
     }
+    if kw.get("activityScore") and "lastWorkAt" not in kw:
+        kw["lastWorkAt"] = bp.fmt_ts(NOW)  # rank_score = activityScore
     base.update(kw)
     return base
 
@@ -260,8 +262,8 @@ class Collect(unittest.TestCase):
         self.assertEqual(repos["a"]["latestRelease"], {"tag": "v1", "publishedAt": "2026-11-20T00:00:00Z", "url": "u"})
         self.assertIsNone(repos["b"]["latestRelease"])
         self.assertIsNone(repos["c"]["latestRelease"])
-        self.assertEqual(repos["a"]["activityScore"], round(math.exp(-1 / 7), 2))
-        self.assertEqual(set(repos["a"]), {"url", "description", "status", "focus", "note", "stars", "archived",
+        self.assertEqual(repos["a"]["activityScore"], 1.0)
+        self.assertEqual(set(bp.strip_private(repos)["a"]), {"url", "description", "status", "focus", "note", "stars", "archived",
                                            "pushedAt", "lastWorkAt", "activityScore", "latestRelease"})
 
     def test_archived_skips_commits(self):
@@ -279,7 +281,7 @@ class Collect(unittest.TestCase):
         prev = {"a": entry(activityScore=3.21, lastWorkAt="2026-11-24T00:00:00Z")}
         api = FakeApi([gh_repo("a")], fail={"a"})
         repos = bp.collect(api, "o", NOW, prev)
-        self.assertEqual(repos["a"]["activityScore"], 3.21)
+        self.assertEqual(repos["a"]["activityScore"], 3.2)
         self.assertEqual(repos["a"]["lastWorkAt"], "2026-11-24T00:00:00Z")
 
 
@@ -309,3 +311,65 @@ class GeneratedAt(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ReviewFixes(unittest.TestCase):
+    """Kod incelemesinde bulunan hatalar için regresyon testleri."""
+
+    def test_unspaced_noise_readme_and_bot_committer(self):
+        for msg in ("chore:bump", "docs:typo", "Update README.md", "Fix README typo"):
+            self.assertEqual(bp.commit_weight(commit(msg)), 0.0, msg)
+        c = commit()
+        c["committer"]["type"] = "Bot"
+        self.assertEqual(bp.commit_weight(c), 0.0)
+
+    def test_stored_score_does_not_decay_daily(self):
+        commits = [commit(days_ago=1), commit("fix: x", days_ago=2)]
+        a, _ = bp.sum_commits(commits, NOW)
+        b, _ = bp.sum_commits(commits, NOW + dt.timedelta(days=1))
+        self.assertEqual((a, b), (1.5, 1.5))
+
+    def test_ranking_prefers_recent_work(self):
+        repos = {"old": entry(activityScore=3, lastWorkAt="2026-11-12T12:00:00Z"),
+                 "new": entry(activityScore=2, lastWorkAt="2026-11-25T12:00:00Z")}
+        self.assertEqual([i["repo"] for i in bp.build_now(repos, NOW)], ["new", "old"])
+
+    def test_archived_release_skipped(self):
+        rel = {"tag": "v1", "publishedAt": "2026-11-24T08:00:00Z", "url": "u"}
+        repos = {"a": entry(latestRelease=rel, archived=True), "b": entry(latestRelease=rel, status="archived")}
+        self.assertEqual(bp.build_now(repos, NOW), [])
+
+    def test_malformed_release_date_skipped(self):
+        rel = {"tag": "v1", "publishedAt": "not-a-date", "url": "u"}
+        self.assertEqual(bp.build_now({"a": entry(latestRelease=rel)}, NOW), [])
+
+    def test_now_line_is_sanitized(self):
+        items = [{"repo": "a", "url": "https://github.com/o/a", "kind": "work",
+                  "text": {"en": "x\n# Heading <!-- NOW:END --> <img src=x> [link](y)", "tr": ""}}]
+        out = bp.render_now(items)
+        self.assertEqual(out.count("\n"), 0)
+        self.assertNotIn("<!-- NOW:END -->", out)
+        self.assertNotIn("<img", out)
+        self.assertNotIn("[link]", out)
+
+    def test_marker_end_searched_after_start(self):
+        text = "<!-- NOW:END -->\n<!-- NOW:START -->\nold\n<!-- NOW:END -->\n"
+        self.assertEqual(bp.replace_between_markers(text, "NOW", "new"),
+                         "<!-- NOW:END -->\n<!-- NOW:START -->\nnew\n<!-- NOW:END -->\n")
+
+    def test_description_is_single_line(self):
+        api = FakeApi([gh_repo("a", description="line1\nline2 <!-- x -->")])
+        self.assertEqual(bp.collect(api, "o", NOW)["a"]["description"], "line1 line2 x")
+
+    def test_unexpected_error_keeps_previous_entry(self):
+        class Boom(FakeApi):
+            def latest_release(self, owner, repo):
+                raise RuntimeError("weird")
+
+        class BadJson(FakeApi):
+            def commits(self, owner, repo, since):
+                raise bp.ApiError("geçersiz JSON")
+
+        prev = {"a": entry(activityScore=2.0)}
+        self.assertEqual(bp.collect(Boom([gh_repo("a")]), "o", NOW, prev)["a"]["activityScore"], 2.0)
+        self.assertEqual(bp.collect(BadJson([gh_repo("a")]), "o", NOW, prev)["a"]["activityScore"], 2.0)

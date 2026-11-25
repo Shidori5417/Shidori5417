@@ -14,6 +14,8 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import html
+import http.client
 import json
 import math
 import os
@@ -41,13 +43,13 @@ COMMIT_CAP = 300
 MIN_SCORE = 0.3
 MAX_WORK = 3
 MAX_NOW = 4
-RELEASE_DAYS = 21
+RELEASE_DAYS = 14
 STATUSES = ("active", "prototype", "released", "maintenance", "paused", "archived")
 
 QUIET_EN = "Quiet stretch; see the repos above."
 QUIET_TR = "Sakin bir dönem; yukarıdaki projelere göz atın."
 
-NOISE_PREFIX = re.compile(r"^(docs|ci|chore|style|build|deps)(\([^)]*\))?!?: ", re.I)
+NOISE_PREFIX = re.compile(r"^(docs|ci|chore|style|build|deps)(\([^)]*\))?!?:", re.I)
 FIX_PREFIX = re.compile(r"^fix(\([^)]*\))?!?(:|\s)", re.I)
 
 
@@ -99,7 +101,7 @@ class GitHub:
                 last = exc
                 if exc.code < 500:
                     break
-            except (urllib.error.URLError, TimeoutError) as exc:
+            except (urllib.error.URLError, http.client.HTTPException, OSError) as exc:
                 last = exc
             time.sleep(1 + attempt)
         code = getattr(last, "code", "ağ")
@@ -107,7 +109,12 @@ class GitHub:
 
     def json(self, path: str):
         status, body = self._open(API + path, "application/vnd.github+json")
-        return None if status == 404 else json.loads(body)
+        if status == 404:
+            return None
+        try:
+            return json.loads(body)
+        except ValueError as exc:
+            raise ApiError(f"geçersiz JSON ({path})") from exc
 
     def list_repos(self, owner: str) -> list[dict]:
         repos: list[dict] = []
@@ -205,7 +212,7 @@ def commit_weight(commit: dict) -> float:
     for user in (author, committer):
         if str(user.get("login") or "").endswith("[bot]"):
             return 0.0
-    if author.get("type") == "Bot":
+    if author.get("type") == "Bot" or committer.get("type") == "Bot":
         return 0.0
     message = (commit.get("commit") or {}).get("message") or ""
     first = message.strip().splitlines()[0].strip() if message.strip() else ""
@@ -214,7 +221,7 @@ def commit_weight(commit: dict) -> float:
     if NOISE_PREFIX.match(first):
         return 0.0
     low = first.lower()
-    if "badge" in low or low.startswith("readme"):
+    if "badge" in low or "readme" in low:
         return 0.0
     if FIX_PREFIX.match(first):
         return 0.5
@@ -249,6 +256,55 @@ def score_commits(commits: list[dict], now: dt.datetime) -> tuple[float, str | N
     return score, (fmt_ts(newest) if newest else None)
 
 
+def sum_commits(commits: list[dict], now: dt.datetime) -> tuple[float, str | None]:
+    """(pencere içindeki anlamlı commit ağırlıklarının toplamı, lastWorkAt). Zamanla azalmaz."""
+    cutoff = now - dt.timedelta(days=WINDOW_DAYS)
+    total = 0.0
+    newest: dt.datetime | None = None
+    for commit in commits:
+        when = commit_time(commit)
+        if when is None or when < cutoff or when > now:
+            continue
+        weight = commit_weight(commit)
+        if weight <= 0:
+            continue
+        total += weight
+        if newest is None or when > newest:
+            newest = when
+    return total, (fmt_ts(newest) if newest else None)
+
+
+def rank_score(r: dict, now: dt.datetime) -> float:
+    """Now sıralaması: commit başına zamanla azalan skor (_rank); yoksa
+    ağırlıklı toplam, son çalışmanın yaşına göre azaltılır."""
+    if r.get("_rank") is not None:
+        return float(r["_rank"])
+    if not r.get("lastWorkAt"):
+        return 0.0
+    try:
+        age_days = max(0.0, (now - parse_ts(r["lastWorkAt"])).total_seconds() / 86400)
+    except (TypeError, ValueError):
+        return 0.0
+    return float(r.get("activityScore") or 0) * math.exp(-age_days / DECAY_DAYS)
+
+
+# ------------------------------------------------------------- temizleme
+
+def clean_text(value: str) -> str:
+    """Tek satır, HTML yorumu/işaret içermeyen düz metin (JSON ve README için)."""
+    text = str(value).replace("<!--", " ").replace("-->", " ")
+    return " ".join(text.split())
+
+
+def md_inline(value: str) -> str:
+    """README listesine güvenle girecek metin: HTML ve link sözdizimi kaçışlı."""
+    text = clean_text(value)
+    text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    for ch in "[]`*_|":
+        text = text.replace(ch, "\\" + ch)
+    return text
+
+
 # -------------------------------------------------------------- toplama
 
 def is_listed(repo: dict, owner: str) -> bool:
@@ -276,28 +332,33 @@ def collect_repo(api, owner: str, repo: dict, now: dt.datetime, prev: dict | Non
 
     archived = bool(repo.get("archived"))
     skip_activity = archived or meta["status"] == "archived"
-    score, last_work = 0.0, None
+    weight_sum, last_work, rank = 0.0, None, None
     if not skip_activity:
         try:
-            score, last_work = score_commits(
-                api.commits(owner, name, now - dt.timedelta(days=WINDOW_DAYS)), now)
+            commits = api.commits(owner, name, now - dt.timedelta(days=WINDOW_DAYS))
+            weight_sum, last_work = sum_commits(commits, now)
+            rank, _ = score_commits(commits, now)
         except ApiError as exc:
             warn(f"{name}: commit'ler alınamadı ({exc}); önceki değer korundu")
-            score, last_work = prev.get("activityScore", 0.0), prev.get("lastWorkAt")
+            weight_sum, last_work = prev.get("activityScore", 0.0), prev.get("lastWorkAt")
 
     release = prev.get("latestRelease")
     try:
         raw = api.latest_release(owner, name)
         release = None
         if raw and not raw.get("draft") and not raw.get("prerelease") and raw.get("published_at"):
-            release = {"tag": raw["tag_name"], "publishedAt": raw["published_at"],
-                       "url": raw["html_url"]}
-    except ApiError as exc:
+            parse_ts(raw["published_at"])  # bozuk tarih → aşağıda yakalanır
+            release = {"tag": clean_text(raw.get("tag_name") or ""), "publishedAt": raw["published_at"],
+                       "url": raw.get("html_url") or f"{repo['html_url']}/releases"}
+            if not release["tag"]:
+                release = None
+    except (ApiError, KeyError, TypeError, ValueError) as exc:
         warn(f"{name}: release alınamadı ({exc}); önceki değer korundu")
+        release = prev.get("latestRelease")
 
     return {
         "url": repo["html_url"],
-        "description": repo.get("description") or "",
+        "description": clean_text(repo.get("description") or ""),
         "status": meta["status"],
         "focus": meta["focus"],
         "note": meta["note"],
@@ -305,8 +366,12 @@ def collect_repo(api, owner: str, repo: dict, now: dt.datetime, prev: dict | Non
         "archived": archived,
         "pushedAt": repo.get("pushed_at"),
         "lastWorkAt": last_work,
-        "activityScore": round(score, 2),
+        # Kayıtta zamanla azalan skor değil, penceredeki ağırlıklı commit toplamı
+        # tutulur; aksi halde dosya her gün değişir, her gün commit/deploy olur.
+        "activityScore": round(weight_sum, 1),
         "latestRelease": release,
+        # Yalnızca bu çalışmadaki sıralama için; JSON'a yazılmaz (strip_private).
+        "_rank": rank,
     }
 
 
@@ -316,7 +381,13 @@ def collect(api, owner: str, now: dt.datetime, prev_repos: dict | None = None) -
     for repo in sorted(api.list_repos(owner), key=lambda r: r["name"].lower()):
         if not is_listed(repo, owner):
             continue
-        entries[repo["name"]] = collect_repo(api, owner, repo, now, prev_repos.get(repo["name"]))
+        name = repo["name"]
+        try:
+            entries[name] = collect_repo(api, owner, repo, now, prev_repos.get(name))
+        except Exception as exc:  # tek repo yüzünden tüm çalışma düşmesin
+            warn(f"{name}: beklenmeyen hata ({exc!r}); önceki değer korundu")
+            if prev_repos.get(name):
+                entries[name] = prev_repos[name]
     return entries
 
 
@@ -326,8 +397,8 @@ def build_now(repos: dict, now: dt.datetime) -> list[dict]:
     items: list[dict] = []
     ranked = sorted(
         ((name, r) for name, r in repos.items()
-         if not r["archived"] and r["status"] != "archived" and r["activityScore"] > MIN_SCORE),
-        key=lambda kv: (-kv[1]["activityScore"], kv[1]["lastWorkAt"] or "", kv[0].lower()),
+         if not r["archived"] and r["status"] != "archived" and rank_score(r, now) > MIN_SCORE),
+        key=lambda kv: (-rank_score(kv[1], now), kv[1]["lastWorkAt"] or "", kv[0].lower()),
     )
     for name, r in ranked[:MAX_WORK]:
         fallback = r["description"] or "Recent work"
@@ -341,9 +412,12 @@ def build_now(repos: dict, now: dt.datetime) -> list[dict]:
     releases = []
     for name, r in repos.items():
         rel = r["latestRelease"]
-        if not rel or name in covered:
+        if not rel or name in covered or r["archived"] or r["status"] == "archived":
             continue
-        published = parse_ts(rel["publishedAt"])
+        try:
+            published = parse_ts(rel["publishedAt"])
+        except (KeyError, TypeError, ValueError):
+            continue
         if cutoff <= published <= now:
             releases.append((published, name, r, rel))
     for published, name, r, rel in sorted(releases, key=lambda x: (-x[0].timestamp(), x[1].lower())):
@@ -366,7 +440,7 @@ def render_featured(cfg: dict) -> str:
         url = f"https://github.com/{owner}/{item['repo']}"
         cells.append(
             '    <td width="50%" valign="top">\n'
-            f'      <a href="{url}"><img src="{item["image"]}" alt="{item["alt"]}" width="100%"></a>\n'
+            f'      <a href="{url}"><img src="{html.escape(item["image"])}" alt="{html.escape(item["alt"])}" width="100%"></a>\n'
             f'      <br><b><a href="{url}">{item["repo"]}</a></b><br>\n'
             f'      {item["blurb"]}<br>\n'
             f'      <sub>{item["stack"]}</sub>\n'
@@ -392,17 +466,18 @@ def render_now(items: list[dict]) -> str:
         return f"- {QUIET_EN}"
     lines = []
     for item in items:
-        link = f"[{item['repo']}]({item['url']})"
+        link = f"[{md_inline(item['repo'])}]({item['url']})"
         if item["kind"] == "release":
-            lines.append(f"- {link} {item['tag']} is out")
+            lines.append(f"- {link} {md_inline(item['tag'])} is out")
         else:
-            lines.append(f"- {link}: {item['text']['en']}")
+            lines.append(f"- {link}: {md_inline(item['text']['en'])}")
     return "\n".join(lines)
 
 
 def replace_between_markers(text: str, name: str, body: str) -> str:
     start, end = f"<!-- {name}:START -->", f"<!-- {name}:END -->"
-    i, j = text.find(start), text.find(end)
+    i = text.find(start)
+    j = text.find(end, i + len(start)) if i >= 0 else -1
     if i < 0 or j < 0 or j < i:
         raise ValueError(f"README'de {start} / {end} işaretleri bulunamadı")
     return text[:i + len(start)] + "\n" + body + "\n" + text[j:]
@@ -416,13 +491,17 @@ def render_readme(text: str, cfg: dict, now_items: list[dict]) -> str:
 
 # ------------------------------------------------------------------ JSON
 
+def strip_private(repos: dict) -> dict:
+    return {name: {k: v for k, v in r.items() if not k.startswith("_")} for name, r in repos.items()}
+
+
 def build_profile(owner: str, generated_at: str, now_items: list[dict], repos: dict) -> dict:
     return {
         "schemaVersion": SCHEMA_VERSION,
         "generatedAt": generated_at,
         "owner": owner,
         "now": now_items,
-        "repos": repos,
+        "repos": strip_private(repos),
     }
 
 

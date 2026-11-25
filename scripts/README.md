@@ -60,8 +60,9 @@ note:                 # isteğe bağlı
 ### Now nasıl seçilir
 
 - Son 14 günün commit'leri puanlanır: `puan = Σ ağırlık · exp(-yaş_gün / 7)`. Merge, bot, `docs/ci/chore/style/build/deps:` önekli ve badge/README commit'leri sayılmaz; `fix` yarım, diğerleri tam puan.
+- `profile.json` içindeki `activityScore` zamanla azalmayan ağırlıklı toplamdır (dosya her gün değişip gereksiz commit/deploy olmasın diye); zamanla azalan puan yalnızca sıralamada kullanılır.
 - Puanı 0.3'ün üstündeki en iyi 3 repo "work" maddesi olur (metin: `focus`, yoksa repo açıklaması).
-- Son 21 günde yayınlanan release'ler (aynı repo zaten "work" ise eklenmez) "release" maddesi olur. En fazla 4 madde.
+- Son 14 günde yayınlanan release'ler (aynı repo zaten "work" ise eklenmez) "release" maddesi olur. En fazla 4 madde.
 - Hiçbiri yoksa tek satır: "Quiet stretch; see the repos above."
 - `archived` repolar (GitHub ya da `status: archived`) puanlanmaz. Yalnızca public, fork olmayan repolar işlenir; profil reposu ve private repolar çıktıda hiç geçmez.
 - Bir repo için API çağrısı başarısız olursa o repo'nun önceki `profile.json` değerleri korunur.

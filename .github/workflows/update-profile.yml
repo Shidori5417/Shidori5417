@@ -16,7 +16,8 @@ permissions:
 
 concurrency:
   group: update-profile
-  cancel-in-progress: true
+  # Çalışan bir commit+deploy adımı yarıda kesilmesin; yeni çalışma sıra bekler.
+  cancel-in-progress: false
 
 jobs:
   cards:
@@ -69,8 +70,16 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets README.md data
           git commit -m "chore: profil kartlarını ve verisini güncelle"
-          git pull --rebase
-          git push
+          # Elle yapılan bir push ile yarışırsa birkaç kez dene; üretilen dosyalar kazanır.
+          for i in 1 2 3; do
+            if git pull --rebase -X theirs && git push; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done
+          echo "Push başarısız oldu." >&2
+          exit 1
 
       # data/profile.json değiştiyse portföy sitesini yeniden dağıt (hook tanımlıysa).
       - name: Portföyü yeniden dağıt

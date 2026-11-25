@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T10:33:41Z",
+  "generatedAt": "2026-11-25T10:45:40Z",
   "owner": "Shidori5417",
   "now": [
     {
@@ -59,7 +59,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:16Z",
       "lastWorkAt": "2026-11-23T23:22:46Z",
-      "activityScore": 21.13,
+      "activityScore": 46.0,
       "latestRelease": null
     },
     "Bandwidth-Prioritizer": {
@@ -78,7 +78,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:18Z",
       "lastWorkAt": "2026-11-24T23:36:01Z",
-      "activityScore": 2.81,
+      "activityScore": 2.5,
       "latestRelease": {
         "tag": "v1.0.0",
         "publishedAt": "2026-03-18T01:11:43Z",
@@ -98,7 +98,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:20Z",
       "lastWorkAt": "2026-11-23T23:22:56Z",
-      "activityScore": 0.48,
+      "activityScore": 1.0,
       "latestRelease": null
     },
     "digcord": {
@@ -146,7 +146,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:26Z",
       "lastWorkAt": "2026-11-23T23:22:26Z",
-      "activityScore": 0.81,
+      "activityScore": 1.0,
       "latestRelease": null
     },
     "helios-agent": {
@@ -162,7 +162,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:28Z",
       "lastWorkAt": "2026-11-23T23:28:27Z",
-      "activityScore": 2.03,
+      "activityScore": 2.5,
       "latestRelease": null
     },
     "micctl": {
@@ -178,7 +178,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:29Z",
       "lastWorkAt": "2026-11-24T23:30:42Z",
-      "activityScore": 0.94,
+      "activityScore": 1.0,
       "latestRelease": null
     },
     "micforge": {
@@ -214,7 +214,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:33Z",
       "lastWorkAt": "2026-11-23T23:22:51Z",
-      "activityScore": 1.51,
+      "activityScore": 7.5,
       "latestRelease": {
         "tag": "v0.1.0",
         "publishedAt": "2026-11-12T13:55:18Z",
@@ -234,7 +234,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:35Z",
       "lastWorkAt": "2026-11-23T23:22:36Z",
-      "activityScore": 1.9,
+      "activityScore": 4.0,
       "latestRelease": null
     },
     "proxyforge": {
@@ -250,7 +250,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:37Z",
       "lastWorkAt": "2026-11-23T23:22:17Z",
-      "activityScore": 9.24,
+      "activityScore": 24.5,
       "latestRelease": {
         "tag": "v0.3.0",
         "publishedAt": "2026-11-20T00:33:59Z",
@@ -270,7 +270,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:38Z",
       "lastWorkAt": "2026-11-23T23:23:01Z",
-      "activityScore": 0.81,
+      "activityScore": 1.0,
       "latestRelease": null
     },
     "vuln-stack": {
