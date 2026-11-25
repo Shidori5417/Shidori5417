@@ -44,6 +44,7 @@
 ## More
 
 <!-- MORE:START -->
+- [mcstat](https://github.com/Shidori5417/mcstat): live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)
 - [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): network traffic shaper that throttles background apps while priority apps like Discord or Zoom run, in Rust · prototype
 - [micctl](https://github.com/Shidori5417/micctl): PipeWire mic DSP and soundboard CLI/TUI, the predecessor of micforge · maintenance
 - [helios-agent](https://github.com/Shidori5417/helios-agent): provider-neutral terminal coding agent in Rust (permission-checked tools, ratatui TUI, MCP/LSP)
@@ -57,8 +58,8 @@
 
 <!-- NOW:START -->
 - [arctop](https://github.com/Shidori5417/arctop): TUI v2 is done; preparing the first release (v0.1).
+- [mcstat](https://github.com/Shidori5417/mcstat): Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)
 - [proxyforge](https://github.com/Shidori5417/proxyforge): v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.
-- [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): Linux build fixed, config hot reload and IPC hardening done; packet shaping is still experimental.
 - [nobetci](https://github.com/Shidori5417/nobetci) v0.1.0 is out
 <!-- NOW:END -->
 

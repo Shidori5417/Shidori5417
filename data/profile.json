@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T10:54:25Z",
+  "generatedAt": "2026-11-25T12:47:18Z",
   "owner": "Shidori5417",
   "now": [
     {
@@ -13,21 +13,21 @@
       }
     },
     {
+      "repo": "mcstat",
+      "url": "https://github.com/Shidori5417/mcstat",
+      "kind": "work",
+      "text": {
+        "en": "Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)",
+        "tr": "Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)"
+      }
+    },
+    {
       "repo": "proxyforge",
       "url": "https://github.com/Shidori5417/proxyforge",
       "kind": "work",
       "text": {
         "en": "v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.",
         "tr": "v0.3.0 yayında: canlı ayar paneli, GeoIP filtreleri ve dönen proxy sunucusu."
-      }
-    },
-    {
-      "repo": "Bandwidth-Prioritizer",
-      "url": "https://github.com/Shidori5417/Bandwidth-Prioritizer",
-      "kind": "work",
-      "text": {
-        "en": "Linux build fixed, config hot reload and IPC hardening done; packet shaping is still experimental.",
-        "tr": "Linux derlemesi düzeltildi, config sıcak yükleme ve IPC güvenliği tamamlandı; paket şekillendirme hâlâ deneysel."
       }
     },
     {
@@ -165,6 +165,19 @@
       "activityScore": 2.5,
       "latestRelease": null
     },
+    "mcstat": {
+      "url": "https://github.com/Shidori5417/mcstat",
+      "description": "Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)",
+      "status": null,
+      "focus": null,
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T12:14:16Z",
+      "lastWorkAt": "2026-11-25T12:04:47Z",
+      "activityScore": 20.0,
+      "latestRelease": null
+    },
     "micctl": {
       "url": "https://github.com/Shidori5417/micctl",
       "description": "PipeWire microphone DSP, soundboard and FX — CLI/TUI (Rust)",
@@ -234,7 +247,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:35Z",
       "lastWorkAt": "2026-11-23T23:22:36Z",
-      "activityScore": 4.0,
+      "activityScore": 3.0,
       "latestRelease": null
     },
     "proxyforge": {
