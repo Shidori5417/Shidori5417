@@ -2,9 +2,12 @@
 """README'nin Featured / More / Now bölümlerini ve data/profile.json dosyasını üretir.
 
 Kaynaklar:
-  - data/projects.yml        Featured ve More içeriği (elle yazılır)
+  - data/projects.yml        Featured listesi ve More için blurb/label geçersiz kılmaları (elle yazılır)
   - <repo>/.github/status.yml Her reponun kendi durumu (status, focus, note)
-  - GitHub API               Repo listesi, son 14 günün commit'leri, son release
+  - GitHub API               Repo listesi, son 14 günün commit'leri, son release,
+                             profilde sabitlenmiş (pinned) repolar (GraphQL, token gerekir)
+
+More otomatiktir: sabitlenmemiş ve Featured'da olmayan tüm public repolar.
 
 Yalnızca public, fork olmayan repolar işlenir; private repo adları hiçbir çıktıya yazılmaz.
 Token: GITHUB_TOKEN (isteğe bağlı, rate limit için). Sahip: PROFILE_OWNER.
@@ -45,6 +48,17 @@ MAX_WORK = 3
 MAX_NOW = 4
 RELEASE_DAYS = 14
 STATUSES = ("active", "prototype", "released", "maintenance", "paused", "archived")
+# Featured künyesinde gösterilen insan-okunur durum etiketleri.
+STATUS_LABELS = {"active": "active", "prototype": "prototype", "released": "released",
+                 "maintenance": "maintenance", "paused": "on hold", "archived": "archived"}
+# More satırında yalnızca varsayılan olmayan durumlar için ipucu çıkar (active/released: yok).
+MORE_HINTS = {"prototype": "prototype", "maintenance": "maintenance", "paused": "on hold"}
+# Açıklama fallback'inde küçük harfe çevrilmeyecek özel isimler.
+PROPER_WORDS = {"Discord", "Linux", "Windows", "Python", "Rust", "GitHub", "Intel", "Telegram",
+                "Docker", "Android", "Arch", "Wayland", "Hyprland", "Java", "Node"}
+MAX_PINNED = 6
+PINNED_QUERY = ("query($login: String!) { user(login: $login) { pinnedItems(first: 6, types: REPOSITORY) "
+                "{ nodes { ... on Repository { name owner { login } isPrivate } } } } }")
 
 QUIET_EN = "Quiet stretch; see the repos above."
 QUIET_TR = "Sakin bir dönem; yukarıdaki projelere göz atın."
@@ -85,14 +99,16 @@ class GitHub:
     def __init__(self, token: str | None):
         self.token = token
 
-    def _open(self, url: str, accept: str, auth: bool = True) -> tuple[int, bytes]:
+    def _open(self, url: str, accept: str, auth: bool = True, body: bytes | None = None) -> tuple[int, bytes]:
         headers = {"Accept": accept, "User-Agent": "profile-readme-builder"}
+        if body is not None:
+            headers["Content-Type"] = "application/json"
         if auth and self.token:
             headers["Authorization"] = f"Bearer {self.token}"
         last: Exception | None = None
         for attempt in range(3):
             try:
-                req = urllib.request.Request(url, headers=headers)
+                req = urllib.request.Request(url, data=body, headers=headers)
                 with urllib.request.urlopen(req, timeout=30) as resp:
                     return resp.status, resp.read()
             except urllib.error.HTTPError as exc:
@@ -145,6 +161,19 @@ class GitHub:
 
     def latest_release(self, owner: str, repo: str) -> dict | None:
         return self.json(f"/repos/{owner}/{repo}/releases/latest")
+
+    def pinned(self, owner: str) -> list[str]:
+        """Profilde sabitlenmiş public repo adları (sabitleme sırasıyla). Token gerekir."""
+        if not self.token:
+            raise ApiError("token yok")
+        body = json.dumps({"query": PINNED_QUERY, "variables": {"login": owner}}).encode()
+        status, raw = self._open(API + "/graphql", "application/json", body=body)
+        if status == 404:
+            raise ApiError("GraphQL 404")
+        try:
+            return parse_pinned(json.loads(raw), owner)
+        except ValueError as exc:
+            raise ApiError("geçersiz JSON (graphql)") from exc
 
     def status_text(self, owner: str, repo: str) -> str | None:
         url = f"{RAW}/{owner}/{repo}/HEAD/.github/status.yml"
@@ -391,6 +420,50 @@ def collect(api, owner: str, now: dt.datetime, prev_repos: dict | None = None) -
     return entries
 
 
+# ---------------------------------------------------------------- pinned
+
+def parse_pinned(payload, owner: str) -> list[str]:
+    """GraphQL yanıtından public ve aynı sahibe ait sabitlenmiş repo adları (sıra korunur).
+    Private, başka sahibe ait ve repo olmayan düğümler atlanır; yanıt bozuksa ApiError."""
+    if not isinstance(payload, dict):
+        raise ApiError("GraphQL yanıtı beklenmeyen biçimde")
+    if payload.get("errors"):
+        raise ApiError("GraphQL hata döndürdü")
+    try:
+        nodes = payload["data"]["user"]["pinnedItems"]["nodes"]
+    except (KeyError, TypeError):
+        raise ApiError("GraphQL yanıtında pinnedItems yok") from None
+    if not isinstance(nodes, list):
+        raise ApiError("GraphQL yanıtı beklenmeyen biçimde")
+    names: list[str] = []
+    for node in nodes:
+        if not isinstance(node, dict):
+            continue
+        name = node.get("name")
+        login = (node.get("owner") or {}).get("login") if isinstance(node.get("owner"), dict) else None
+        if not isinstance(name, str) or not name or not isinstance(login, str):
+            continue
+        if node.get("isPrivate") is not False or login.lower() != owner.lower():
+            continue
+        if name not in names:
+            names.append(name)
+    return names[:MAX_PINNED]
+
+
+def fetch_pinned(api, owner: str, prev: list | None) -> list[str]:
+    """Pinned listesi; çağrı başarısız olursa önceki profile.json listesi, o da yoksa boş. Asla hata fırlatmaz."""
+    try:
+        return api.pinned(owner)
+    except Exception as exc:  # çalışma hiçbir koşulda düşmesin
+        old = [n for n in prev if isinstance(n, str)] if isinstance(prev, list) else []
+        if old:
+            warn(f"pinned alınamadı ({exc}); önceki liste korundu")
+            return old
+        warn(f"pinned alınamadı ({exc}); sabitlenmiş repo yokmuş gibi devam ediliyor, "
+             "More'da sabitlenmiş repolar da görünebilir")
+        return []
+
+
 # ------------------------------------------------------------------ Now
 
 def build_now(repos: dict, now: dt.datetime) -> list[dict]:
@@ -433,32 +506,111 @@ def build_now(repos: dict, now: dt.datetime) -> list[dict]:
 
 # ----------------------------------------------------------- README render
 
-def render_featured(cfg: dict) -> str:
+def _esc(value) -> str:
+    """HTML metin/öznitelik değeri için kaçış."""
+    return html.escape(str(value), quote=True)
+
+
+def featured_meta(item: dict, entry: dict | None) -> str:
+    """Featured hücresinin künye satırı (HTML): stack — son release · durum · ★ yıldız.
+    Canlı veri yoksa yalnızca stack."""
+    entry = entry or {}
+    live: list[str] = []
+    rel = entry.get("latestRelease") if isinstance(entry.get("latestRelease"), dict) else None
+    tag = clean_text(rel.get("tag") or "") if rel else ""
+    if tag:
+        url = str(rel.get("url") or "")
+        if url.startswith("https://github.com/"):
+            live.append(f'<a href="{_esc(url)}">{_esc(tag)}</a>')
+        else:
+            live.append(_esc(tag))
+    label = STATUS_LABELS.get(entry.get("status"))
+    # "released" ile bir release etiketi zaten aynı şeyi söyler.
+    if label and not (entry.get("status") == "released" and tag):
+        live.append(label)
+    try:
+        stars = int(entry.get("stars") or 0)
+    except (TypeError, ValueError):
+        stars = 0
+    if stars > 0:
+        live.append(f"★ {stars}")
+    stack = _esc(item.get("stack") or "")
+    return " — ".join(part for part in (stack, " · ".join(live)) if part)
+
+
+def render_featured(cfg: dict, repos: dict | None = None) -> str:
     owner = cfg["owner"]
+    repos = repos or {}
     cells = []
     for item in cfg["featured"]:
-        url = f"https://github.com/{owner}/{item['repo']}"
-        cells.append(
-            '    <td width="50%" valign="top">\n'
-            f'      <a href="{url}"><img src="{html.escape(item["image"])}" alt="{html.escape(item["alt"])}" width="100%"></a>\n'
-            f'      <br><b><a href="{url}">{item["repo"]}</a></b><br>\n'
-            f'      {item["blurb"]}<br>\n'
-            f'      <sub>{item["stack"]}</sub>\n'
-            "    </td>"
-        )
+        name = item["repo"]
+        url = _esc(f"https://github.com/{owner}/{name}")
+        entry = repos.get(name)
+        lines = [
+            f'      <a href="{url}"><img src="{_esc(item["image"])}" alt="{_esc(item["alt"])}" width="100%"></a>',
+            f'      <br><b><a href="{url}">{_esc(name)}</a></b><br>',
+            f'      {_esc(item["blurb"])}<br>',
+        ]
+        focus = ((entry or {}).get("focus") or {}).get("en") if item.get("focus") else None
+        if focus:  # isteğe bağlı: projects.yml'de `focus: true`
+            lines.append(f"      <sub><i>{_esc(clean_text(focus))}</i></sub><br>")
+        meta = featured_meta(item, entry)
+        if meta:
+            lines.append(f"      <sub>{meta}</sub>")
+        elif lines[-1].endswith("<br>"):
+            lines[-1] = lines[-1][:-4]
+        cells.append('    <td width="50%" valign="top">\n' + "\n".join(lines) + "\n    </td>")
+    if len(cells) % 2:  # tek sayıda öğe: son satır boş hücreyle tamamlanır, genişlikler tutarlı kalır
+        cells.append('    <td width="50%"></td>')
     rows = []
     for i in range(0, len(cells), 2):
         rows.append("  <tr>\n" + "\n".join(cells[i:i + 2]) + "\n  </tr>")
     return "<table>\n" + "\n".join(rows) + "\n</table>"
 
 
-def render_more(cfg: dict) -> str:
-    owner = cfg["owner"]
+def select_more(cfg: dict, repos: dict, pinned: list[str]) -> list[str]:
+    """More'da gösterilecek repo adları: arşivlenmemiş, sabitlenmemiş ve Featured'da olmayanlar.
+    Sıra: lastWorkAt azalan, sonra pushedAt azalan, sonra ad."""
+    skip = {str(n).lower() for n in pinned} | {str(i["repo"]).lower() for i in cfg.get("featured") or []}
+    names = [n for n, r in repos.items()
+             if n.lower() not in skip and not r.get("archived") and r.get("status") != "archived"]
+    names.sort(key=lambda n: n.lower())
+    # Kararlı sıralamalar: önce ikincil anahtar, en son birincil anahtar.
+    names.sort(key=lambda n: repos[n].get("pushedAt") or "", reverse=True)
+    names.sort(key=lambda n: repos[n].get("lastWorkAt") or "", reverse=True)
+    return names
+
+
+def describe(description: str) -> str:
+    """GitHub açıklamasını More üslubuna çevirir: tek satır, sondaki nokta yok,
+    ilk harf küçük (kısaltma ve özel isimler hariç)."""
+    text = clean_text(description)
+    if text.endswith(".") and not text.endswith(".."):
+        text = text[:-1]
+    first = text.split(" ", 1)[0].rstrip(":,;")
+    if first == "A" or (len(first) > 1 and first[0].isupper() and first[1:].islower() and first not in PROPER_WORDS):
+        text = text[0].lower() + text[1:]
+    return text
+
+
+def render_more(cfg: dict, repos: dict, pinned: list[str]) -> str:
+    blurbs = {str(k).lower(): v for k, v in (cfg.get("blurbs") or {}).items()}
+    labels = {str(k).lower(): v for k, v in (cfg.get("labels") or {}).items()}
     lines = []
-    for item in cfg["more"]:
-        label = f" ({item['label']})" if item.get("label") else ""
-        lines.append(f"- [{item['repo']}](https://github.com/{owner}/{item['repo']}){label}: {item['blurb']}")
-    return "\n".join(lines)
+    for name in select_more(cfg, repos, pinned):
+        r = repos[name]
+        blurb = blurbs.get(name.lower()) or describe(r.get("description") or "")
+        label = labels.get(name.lower())
+        line = f"- [{md_inline(name)}]({r['url']})"
+        if label:
+            line += f" ({md_inline(label)})"
+        if blurb:
+            line += f": {md_inline(blurb)}"
+        hint = MORE_HINTS.get(r.get("status"))
+        if hint:
+            line += f" · {hint}"
+        lines.append(line)
+    return "\n".join(lines) if lines else "- Nothing else yet; see the pinned repositories below."
 
 
 def render_now(items: list[dict]) -> str:
@@ -483,9 +635,11 @@ def replace_between_markers(text: str, name: str, body: str) -> str:
     return text[:i + len(start)] + "\n" + body + "\n" + text[j:]
 
 
-def render_readme(text: str, cfg: dict, now_items: list[dict]) -> str:
-    text = replace_between_markers(text, "FEATURED", render_featured(cfg))
-    text = replace_between_markers(text, "MORE", render_more(cfg))
+def render_readme(text: str, cfg: dict, now_items: list[dict], repos: dict | None = None,
+                  pinned: list[str] | None = None) -> str:
+    repos = repos or {}
+    text = replace_between_markers(text, "FEATURED", render_featured(cfg, repos))
+    text = replace_between_markers(text, "MORE", render_more(cfg, repos, pinned or []))
     return replace_between_markers(text, "NOW", render_now(now_items))
 
 
@@ -495,13 +649,15 @@ def strip_private(repos: dict) -> dict:
     return {name: {k: v for k, v in r.items() if not k.startswith("_")} for name, r in repos.items()}
 
 
-def build_profile(owner: str, generated_at: str, now_items: list[dict], repos: dict) -> dict:
+def build_profile(owner: str, generated_at: str, now_items: list[dict], repos: dict,
+                  pinned: list[str] | None = None) -> dict:
     return {
         "schemaVersion": SCHEMA_VERSION,
         "generatedAt": generated_at,
         "owner": owner,
         "now": now_items,
         "repos": strip_private(repos),
+        "pinned": list(pinned or []),
     }
 
 
@@ -550,17 +706,18 @@ def main(argv: list[str] | None = None) -> int:
         print(f"hata: repo listesi alınamadı ({exc}); dosyalar değişmedi", file=sys.stderr)
         return 1
 
+    pinned = fetch_pinned(GitHub(token), owner, (old or {}).get("pinned"))
     now_items = build_now(repos, now)
-    profile = build_profile(owner, "", now_items, repos)
+    profile = build_profile(owner, "", now_items, repos, pinned)
     profile["generatedAt"] = stable_generated_at(profile, old, now)
 
     readme_old = README.read_text(encoding="utf-8")
-    readme_new = render_readme(readme_old, cfg, now_items)
+    readme_new = render_readme(readme_old, cfg, now_items, repos, pinned)
     payload = dump_profile(profile)
 
     if args.dry_run:
-        print("=== FEATURED ===\n" + render_featured(cfg))
-        print("\n=== MORE ===\n" + render_more(cfg))
+        print("=== FEATURED ===\n" + render_featured(cfg, repos))
+        print("\n=== MORE ===\n" + render_more(cfg, repos, pinned))
         print("\n=== NOW ===\n" + render_now(now_items))
         print("\n=== data/profile.json ===\n" + payload, end="")
         return 0
@@ -569,7 +726,7 @@ def main(argv: list[str] | None = None) -> int:
     if readme_new != readme_old:
         README.write_text(readme_new, encoding="utf-8")
     PROFILE.write_text(payload, encoding="utf-8")
-    print(f"{len(repos)} repo, {len(now_items)} Now maddesi.")
+    print(f"{len(repos)} repo, {len(pinned)} pinned, {len(now_items)} Now maddesi.")
     return 0
 
 

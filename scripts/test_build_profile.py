@@ -177,13 +177,15 @@ class Markers(unittest.TestCase):
         cfg = {
             "owner": "o",
             "featured": [{"repo": "r", "image": "img.png", "alt": "alt", "blurb": "Blurb.", "stack": "Rust"}] * 3,
-            "more": [{"repo": "a", "blurb": "text"}, {"repo": "b", "label": "Etiket", "blurb": "other"}],
+            "blurbs": {"a": "text", "b": "other"},
+            "labels": {"b": "Etiket"},
         }
         html = bp.render_featured(cfg)
         self.assertEqual(html.count("<tr>"), 2)
-        self.assertEqual(html.count("<td"), 3)
+        self.assertEqual(html.count("<td"), 4)  # tek sayıda öğe: son hücre boş
         self.assertIn('<a href="https://github.com/o/r"><img src="img.png" alt="alt" width="100%"></a>', html)
-        self.assertEqual(bp.render_more(cfg),
+        repos = {"a": entry(url="https://github.com/o/a"), "b": entry(url="https://github.com/o/b")}
+        self.assertEqual(bp.render_more(cfg, repos, []),
                          "- [a](https://github.com/o/a): text\n- [b](https://github.com/o/b) (Etiket): other")
 
 
@@ -207,8 +209,9 @@ class StatusYaml(unittest.TestCase):
 
 
 class FakeApi:
-    def __init__(self, repos, statuses=None, commits=None, releases=None, fail=()):
+    def __init__(self, repos, statuses=None, commits=None, releases=None, fail=(), pinned=None):
         self._repos, self.statuses = repos, statuses or {}
+        self._pinned = pinned
         self._commits, self._releases, self.fail = commits or {}, releases or {}, set(fail)
         self.touched: list[str] = []
 
@@ -227,6 +230,11 @@ class FakeApi:
 
     def latest_release(self, owner, repo):
         return self._releases.get(repo)
+
+    def pinned(self, owner):
+        if isinstance(self._pinned, Exception):
+            raise self._pinned
+        return self._pinned or []
 
 
 def gh_repo(name, **kw):
@@ -305,8 +313,262 @@ class GeneratedAt(unittest.TestCase):
     def test_dump_format(self):
         out = bp.dump_profile(bp.build_profile("o", "t", [], {}))
         self.assertTrue(out.endswith("}\n"))
-        self.assertEqual(list(__import__("json").loads(out)), ["schemaVersion", "generatedAt", "owner", "now", "repos"])
+        self.assertEqual(list(__import__("json").loads(out)), ["schemaVersion", "generatedAt", "owner", "now", "repos", "pinned"])
         self.assertIn("ü", bp.dump_profile({"x": "ü"}))
+
+
+def gql(*nodes):
+    return {"data": {"user": {"pinnedItems": {"nodes": list(nodes)}}}}
+
+
+def node(name, owner="o", private=False):
+    return {"name": name, "owner": {"login": owner}, "isPrivate": private}
+
+
+class Pinned(unittest.TestCase):
+    def test_order_kept(self):
+        self.assertEqual(bp.parse_pinned(gql(node("b"), node("a"), node("c")), "o"), ["b", "a", "c"])
+
+    def test_private_other_owner_and_non_repo_ignored(self):
+        payload = gql(node("pub"), node("secret", private=True), node("theirs", owner="x"), {},
+                      {"name": "nolabel"}, node("same", owner="O"))
+        self.assertEqual(bp.parse_pinned(payload, "o"), ["pub", "same"])
+
+    def test_unknown_privacy_is_not_listed(self):
+        self.assertEqual(bp.parse_pinned(gql({"name": "a", "owner": {"login": "o"}}), "o"), [])
+
+    def test_duplicates_and_cap(self):
+        self.assertEqual(bp.parse_pinned(gql(node("a"), node("a")), "o"), ["a"])
+        many = gql(*[node(f"r{i}") for i in range(9)])
+        self.assertEqual(len(bp.parse_pinned(many, "o")), bp.MAX_PINNED)
+
+    def test_malformed_raises(self):
+        for payload in (None, [], {}, {"data": None}, {"data": {"user": None}},
+                        {"errors": [{"message": "x"}], "data": None},
+                        {"data": {"user": {"pinnedItems": {"nodes": None}}}}):
+            with self.assertRaises(bp.ApiError, msg=payload):
+                bp.parse_pinned(payload, "o")
+
+    def test_no_token_raises_without_network(self):
+        with self.assertRaises(bp.ApiError):
+            bp.GitHub(None).pinned("o")
+
+    def test_fetch_ok(self):
+        self.assertEqual(bp.fetch_pinned(FakeApi([], pinned=["a"]), "o", ["old"]), ["a"])
+
+    def test_fetch_failure_falls_back_to_previous(self):
+        api = FakeApi([], pinned=bp.ApiError("boom"))
+        self.assertEqual(bp.fetch_pinned(api, "o", ["x", 3, "y"]), ["x", "y"])
+
+    def test_fetch_failure_without_previous_is_empty(self):
+        for prev in (None, [], "junk"):
+            self.assertEqual(bp.fetch_pinned(FakeApi([], pinned=bp.ApiError("boom")), "o", prev), [])
+
+    def test_fetch_never_raises_on_unexpected_error(self):
+        self.assertEqual(bp.fetch_pinned(FakeApi([], pinned=RuntimeError("weird")), "o", None), [])
+
+    def test_profile_json_gains_pinned_and_keeps_shape(self):
+        profile = bp.build_profile("o", "t", [], {"a": entry()}, ["a", "b"])
+        self.assertEqual(profile["pinned"], ["a", "b"])
+        self.assertTrue({"schemaVersion", "generatedAt", "owner", "now", "repos"} <= set(profile))
+        self.assertEqual(bp.build_profile("o", "t", [], {})["pinned"], [])
+
+    def test_pinned_change_refreshes_generated_at(self):
+        old = bp.build_profile("o", "2026-11-20T03:17:00Z", [], {}, ["a"])
+        new = bp.build_profile("o", "", [], {}, ["a", "b"])
+        self.assertEqual(bp.stable_generated_at(new, old, NOW), "2026-11-25T12:00:00Z")
+
+
+class MoreList(unittest.TestCase):
+    CFG = {"owner": "o", "featured": [{"repo": "feat"}], "blurbs": {}, "labels": {}}
+
+    def repos(self, **extra):
+        base = {n: entry(url=f"https://github.com/o/{n}", description=f"Tool {n}")
+                for n in ("feat", "pin", "plain", "gone", "gone2")}
+        base["gone"]["archived"] = True
+        base["gone2"]["status"] = "archived"
+        base.update(extra)
+        return base
+
+    def test_excludes_pinned_featured_archived(self):
+        self.assertEqual(bp.select_more(self.CFG, self.repos(), ["pin"]), ["plain"])
+
+    def test_pinned_and_featured_match_case_insensitively(self):
+        cfg = dict(self.CFG, featured=[{"repo": "FEAT"}])
+        self.assertEqual(bp.select_more(cfg, self.repos(), ["PIN"]), ["plain"])
+
+    def test_every_other_repo_listed_when_nothing_pinned(self):
+        self.assertEqual(sorted(bp.select_more(self.CFG, self.repos(), [])), ["pin", "plain"])
+
+    def test_order_last_work_then_pushed_then_name(self):
+        repos = {
+            "z-old": entry(lastWorkAt="2026-11-20T00:00:00Z", pushedAt="2026-11-01T00:00:00Z"),
+            "a-new": entry(lastWorkAt="2026-11-24T00:00:00Z", pushedAt="2026-11-01T00:00:00Z"),
+            "b-push": entry(lastWorkAt=None, pushedAt="2026-11-23T00:00:00Z"),
+            "c-push": entry(lastWorkAt=None, pushedAt="2026-11-10T00:00:00Z"),
+            "d-tie": entry(lastWorkAt=None, pushedAt="2026-11-10T00:00:00Z"),
+            "never": entry(lastWorkAt=None, pushedAt=None),
+        }
+        self.assertEqual(bp.select_more({"featured": []}, repos, []),
+                         ["a-new", "z-old", "b-push", "c-push", "d-tie", "never"])
+
+    def render(self, repos, **cfg):
+        return bp.render_more(dict(self.CFG, **cfg), repos, [])
+
+    def test_blurb_override_beats_description(self):
+        repos = {"a": entry(url="https://x/a", description="GitHub text")}
+        self.assertEqual(self.render(repos, blurbs={"a": "hand written"}), "- [a](https://x/a): hand written")
+
+    def test_description_fallback_is_lowercased_in_house_style(self):
+        cases = {
+            "Switch work modes with one command.": "switch work modes with one command",
+            "PipeWire microphone DSP": "PipeWire microphone DSP",
+            "CVE scanner": "CVE scanner",
+            "Discord vanity URL monitor": "Discord vanity URL monitor",
+            "A tiny tool...": "a tiny tool...",
+        }
+        for desc, want in cases.items():
+            repos = {"a": entry(url="https://x/a", description=desc)}
+            self.assertEqual(self.render(repos), f"- [a](https://x/a): {want}", desc)
+
+    def test_no_blurb_no_description_is_just_the_link(self):
+        self.assertEqual(self.render({"a": entry(url="https://x/a", description="")}), "- [a](https://x/a)")
+
+    def test_label(self):
+        repos = {"DomainSniper": entry(url="https://x/d", description="")}
+        self.assertEqual(self.render(repos, blurbs={"domainsniper": "monitor"}, labels={"DomainSniper": "DomainGözcü"}),
+                         "- [DomainSniper](https://x/d) (DomainGözcü): monitor")
+
+    def test_status_hints(self):
+        out = {}
+        for status in (None, "active", "released", "prototype", "maintenance", "paused"):
+            repos = {"a": entry(url="https://x/a", description="d", status=status)}
+            out[status] = self.render(repos)
+        self.assertEqual(out[None], "- [a](https://x/a): d")
+        self.assertEqual(out["active"], out[None])
+        self.assertEqual(out["released"], out[None])
+        self.assertEqual(out["prototype"], "- [a](https://x/a): d · prototype")
+        self.assertEqual(out["maintenance"], "- [a](https://x/a): d · maintenance")
+        self.assertEqual(out["paused"], "- [a](https://x/a): d · on hold")
+
+    def test_hint_on_link_only_line(self):
+        repos = {"a": entry(url="https://x/a", description="", status="paused")}
+        self.assertEqual(self.render(repos), "- [a](https://x/a) · on hold")
+
+    def test_untrusted_text_is_sanitized(self):
+        desc = "x\n# H <!-- MORE:END --> <img src=x> [l](y) *b*"
+        repos = {"a": entry(url="https://x/a", description=desc),
+                 "b": entry(url="https://x/b", description="")}
+        out = self.render(repos, blurbs={"b": "<script>alert(1)</script> [m](n)"})
+        self.assertEqual(out.count("\n"), 1)  # iki madde, iki satır
+        for bad in ("<!--", "<img", "<script", "[l]", "[m]", "*b*"):
+            self.assertNotIn(bad, out)
+
+    def test_empty_list_has_placeholder(self):
+        self.assertTrue(bp.render_more(self.CFG, {}, []).startswith("- "))
+
+    def test_readme_gets_more_section(self):
+        text = "<!-- FEATURED:START -->\n<!-- FEATURED:END -->\n<!-- MORE:START -->\n<!-- MORE:END -->\n<!-- NOW:START -->\n<!-- NOW:END -->\n"
+        cfg = dict(self.CFG, featured=[])
+        out = bp.render_readme(text, cfg, [], {"a": entry(url="https://x/a", description="Desc")}, [])
+        self.assertIn("<!-- MORE:START -->\n- [a](https://x/a): desc\n<!-- MORE:END -->", out)
+
+
+class FeaturedMeta(unittest.TestCase):
+    ITEM = {"repo": "r", "image": "i.png", "alt": "alt", "blurb": "Blurb.", "stack": "Rust · ratatui"}
+    REL = {"tag": "v0.1.0", "publishedAt": "2026-11-12T00:00:00Z",
+           "url": "https://github.com/o/r/releases/tag/v0.1.0"}
+
+    def test_stack_only_without_live_data(self):
+        self.assertEqual(bp.featured_meta(self.ITEM, None), "Rust · ratatui")
+        self.assertEqual(bp.featured_meta(self.ITEM, entry()), "Rust · ratatui")
+
+    def test_release_and_status(self):
+        out = bp.featured_meta(self.ITEM, entry(latestRelease=self.REL, status="maintenance"))
+        self.assertEqual(out, 'Rust · ratatui — <a href="https://github.com/o/r/releases/tag/v0.1.0">v0.1.0</a> · maintenance')
+
+    def test_released_status_hidden_when_tag_shown(self):
+        out = bp.featured_meta(self.ITEM, entry(latestRelease=self.REL, status="released"))
+        self.assertNotIn("released", out.replace("/releases/", ""))
+        self.assertIn(">v0.1.0</a>", out)
+
+    def test_status_without_release(self):
+        self.assertEqual(bp.featured_meta(self.ITEM, entry(status="released")), "Rust · ratatui — released")
+        self.assertEqual(bp.featured_meta(self.ITEM, entry(status="paused")), "Rust · ratatui — on hold")
+
+    def test_stars_only_when_positive(self):
+        self.assertNotIn("★", bp.featured_meta(self.ITEM, entry(stars=0)))
+        self.assertTrue(bp.featured_meta(self.ITEM, entry(stars=12)).endswith("★ 12"))
+
+    def test_untrusted_values_escaped(self):
+        rel = {"tag": 'v1"><script>', "url": 'https://github.com/o/r/"><img src=x>'}
+        out = bp.featured_meta(self.ITEM, entry(latestRelease=rel))
+        self.assertNotIn("<script", out)
+        self.assertNotIn("<img", out)
+        self.assertNotIn('"><', out)
+
+    def test_non_github_release_url_not_linked(self):
+        rel = {"tag": "v1", "url": "javascript:alert(1)"}
+        out = bp.featured_meta(self.ITEM, entry(latestRelease=rel))
+        self.assertNotIn("href", out)
+        self.assertIn("v1", out)
+
+    def test_stack_is_escaped_and_empty_meta_possible(self):
+        self.assertEqual(bp.featured_meta({"stack": "C&C <x>"}, None), "C&amp;C &lt;x&gt;")
+        self.assertEqual(bp.featured_meta({}, None), "")
+
+
+class FeaturedRender(unittest.TestCase):
+    def cfg(self, n, **extra):
+        item = {"repo": "r", "image": "i.png", "alt": "alt", "blurb": "Blurb.", "stack": "Rust"}
+        return {"owner": "o", "featured": [dict(item, repo=f"r{i}", **extra) for i in range(n)]}
+
+    def test_even_count_has_no_empty_cell(self):
+        out = bp.render_featured(self.cfg(4))
+        self.assertEqual((out.count("<tr>"), out.count("<td"), out.count("<td width=\"50%\"></td>")), (2, 4, 0))
+
+    def test_odd_count_gets_empty_balancing_cell(self):
+        for n, rows in ((1, 1), (3, 2), (5, 3)):
+            out = bp.render_featured(self.cfg(n))
+            self.assertEqual(out.count("<tr>"), rows, n)
+            self.assertEqual(out.count("<td"), rows * 2, n)
+            self.assertEqual(out.count('<td width="50%"></td>'), 1, n)
+            self.assertEqual(out.count('<td width="50%" valign="top">'), n, n)
+            self.assertEqual(out.count("</td>"), out.count("<td"))
+
+    def test_cell_has_live_meta_and_keeps_links_and_alt(self):
+        repos = {"r0": entry(status="maintenance", stars=3,
+                             latestRelease={"tag": "v1.0", "url": "https://github.com/o/r0/releases/tag/v1.0"})}
+        out = bp.render_featured(self.cfg(1), repos)
+        self.assertIn('<a href="https://github.com/o/r0"><img src="i.png" alt="alt" width="100%"></a>', out)
+        self.assertIn("<br><b><a href=\"https://github.com/o/r0\">r0</a></b><br>", out)
+        self.assertIn("Blurb.<br>\n      <sub>Rust — ", out)
+        self.assertIn(">v1.0</a> · maintenance · ★ 3</sub>", out)
+
+    def test_missing_repo_data_degrades_to_stack(self):
+        out = bp.render_featured(self.cfg(2), {})
+        self.assertIn("<sub>Rust</sub>", out)
+
+    def test_attributes_and_text_escaped(self):
+        cfg = self.cfg(1)
+        cfg["featured"][0].update(image='x.png" onerror="y', alt='a"><b>', blurb="<i>hi</i> & co")
+        out = bp.render_featured(cfg)
+        self.assertNotIn('onerror="y"', out)
+        self.assertNotIn("<i>hi</i>", out)
+        self.assertIn("&lt;i&gt;hi&lt;/i&gt; &amp; co", out)
+
+    def test_focus_is_opt_in(self):
+        repos = {"r0": entry(focus={"en": "Doing <X>", "tr": "t"})}
+        self.assertNotIn("Doing", bp.render_featured(self.cfg(1), repos))
+        out = bp.render_featured(self.cfg(1, focus=True), repos)
+        self.assertIn("<sub><i>Doing &lt;X&gt;</i></sub>", out)
+
+    def test_cell_without_any_meta_has_no_trailing_br(self):
+        cfg = self.cfg(1)
+        cfg["featured"][0]["stack"] = ""
+        out = bp.render_featured(cfg)
+        self.assertNotIn("<sub>", out)
+        self.assertIn("      Blurb.\n    </td>", out)
 
 
 if __name__ == "__main__":

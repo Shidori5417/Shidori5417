@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T10:45:40Z",
+  "generatedAt": "2026-11-25T10:54:25Z",
   "owner": "Shidori5417",
   "now": [
     {
@@ -289,5 +289,13 @@
       "activityScore": 0.0,
       "latestRelease": null
     }
-  }
+  },
+  "pinned": [
+    "micforge",
+    "arctop",
+    "proxyforge",
+    "nobetci",
+    "pakiz",
+    "DomainSniper"
+  ]
 }
