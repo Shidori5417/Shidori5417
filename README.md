@@ -8,6 +8,7 @@
 
 ## Featured
 
+<!-- FEATURED:START -->
 <table>
   <tr>
     <td width="50%" valign="top">
@@ -38,25 +39,30 @@
     </td>
   </tr>
 </table>
+<!-- FEATURED:END -->
 
 ## More
 
+<!-- MORE:START -->
 - [proxyforge](https://github.com/Shidori5417/proxyforge): fast, concurrent proxy checker for HTTP/HTTPS/SOCKS4/SOCKS5 with a live TUI dashboard, GeoIP and a rotating proxy server, in Rust
 - [arctop](https://github.com/Shidori5417/arctop): live terminal monitor for Intel Arc GPUs (frequency, power, engine load, per-process GPU/VRAM), no root needed, in Rust
 - [helios-agent](https://github.com/Shidori5417/helios-agent): provider-neutral terminal coding agent in Rust (permission-checked tools, ratatui TUI, MCP/LSP)
+- [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): network traffic shaper that throttles background apps while priority apps like Discord or Zoom run (prototype), in Rust
 - [DomainSniper](https://github.com/Shidori5417/DomainSniper) (DomainGözcü): 24/7 domain status monitor (DNS/RDAP/WHOIS) with Discord/Telegram alerts, in Rust
 - [VanityGozcu](https://github.com/Shidori5417/VanityGozcu): Discord vanity URL monitor with a ratatui TUI and Discord/Telegram notifications, in Rust
 - [Context-Switcher](https://github.com/Shidori5417/Context-Switcher): switch work modes with one command (processes, window layout, browser, audio), Python CLI/TUI
 - [ExifGhost](https://github.com/Shidori5417/ExifGhost): desktop app that strips metadata from photos, audio and video locally, Python
 - [micctl](https://github.com/Shidori5417/micctl): PipeWire mic DSP and soundboard CLI/TUI, the predecessor of micforge
+<!-- MORE:END -->
 
 ## Now
 
-- Working on [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): a Rust traffic shaper that throttles background apps while Discord/Zoom are running; Linux build fixed, config hot reload and IPC hardening done, packet shaping still experimental
-- arctop: TUI v2 is done, preparing the first release (v0.1)
-- proxyforge v0.3 is out (TUI settings panel, re-run keys)
-- Went through every public repo: CI, clippy and bug fixes, install docs
-- digcord, a terminal Discord client in Rust, is on hold after the initial skeleton
+<!-- NOW:START -->
+- [arctop](https://github.com/Shidori5417/arctop): TUI v2 is done; preparing the first release (v0.1).
+- [proxyforge](https://github.com/Shidori5417/proxyforge): v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.
+- [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): Linux build fixed, config hot reload and IPC hardening done; packet shaping is still experimental.
+- [nobetci](https://github.com/Shidori5417/nobetci) v0.1.0 is out
+<!-- NOW:END -->
 
 ## Stack
 

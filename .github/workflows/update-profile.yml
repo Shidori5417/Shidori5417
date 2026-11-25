@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "scripts/**"
+      - "data/projects.yml"
       - ".github/workflows/update-profile.yml"
 
 permissions:
@@ -19,7 +20,7 @@ concurrency:
 
 jobs:
   cards:
-    name: İstatistik kartları
+    name: Kartlar ve profil verisi
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,16 +37,50 @@ jobs:
           PROFILE_OWNER: ${{ github.repository_owner }}
         run: python scripts/build_cards.py
 
-      - name: Değiştiyse commit at
+      # Featured/More/Now bölümlerini ve data/profile.json dosyasını üretir.
+      - name: README bölümlerini ve profile.json'ı üret
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROFILE_OWNER: ${{ github.repository_owner }}
         run: |
-          # Sadece tarih değiştiyse commit atma
-          if git diff --quiet -I '[0-9][0-9][.][0-9][0-9][.][0-9][0-9][0-9][0-9]' -- assets; then
-            echo "Kartlar güncel."
+          pip install --quiet pyyaml
+          python scripts/build_profile.py
+
+      - name: Değiştiyse commit at
+        id: commit
+        run: |
+          git add -N README.md data assets
+          changed=false
+          # Kartlarda sadece tarih değiştiyse sayma
+          if ! git diff --quiet -I '[0-9][0-9][.][0-9][0-9][.][0-9][0-9][0-9][0-9]' -- assets; then
+            changed=true
+          fi
+          if ! git diff --quiet -- README.md data; then
+            changed=true
+          fi
+          if [ "$changed" != "true" ]; then
+            echo "Her şey güncel."
             exit 0
+          fi
+          if ! git diff --quiet -- data/profile.json; then
+            echo "profile_changed=true" >> "$GITHUB_OUTPUT"
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets
-          git commit -m "chore: profil kartlarını güncelle"
+          git add assets README.md data
+          git commit -m "chore: profil kartlarını ve verisini güncelle"
           git pull --rebase
           git push
+
+      # data/profile.json değiştiyse portföy sitesini yeniden dağıt (hook tanımlıysa).
+      - name: Portföyü yeniden dağıt
+        if: steps.commit.outputs.profile_changed == 'true'
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "VERCEL_DEPLOY_HOOK tanımlı değil; atlandı."
+            exit 0
+          fi
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK" > /dev/null
+          echo "Dağıtım tetiklendi."

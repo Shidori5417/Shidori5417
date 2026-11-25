@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-25T10:33:41Z",
+  "owner": "Shidori5417",
+  "now": [
+    {
+      "repo": "arctop",
+      "url": "https://github.com/Shidori5417/arctop",
+      "kind": "work",
+      "text": {
+        "en": "TUI v2 is done; preparing the first release (v0.1).",
+        "tr": "TUI v2 tamamlandı; ilk sürüm (v0.1) hazırlanıyor."
+      }
+    },
+    {
+      "repo": "proxyforge",
+      "url": "https://github.com/Shidori5417/proxyforge",
+      "kind": "work",
+      "text": {
+        "en": "v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.",
+        "tr": "v0.3.0 yayında: canlı ayar paneli, GeoIP filtreleri ve dönen proxy sunucusu."
+      }
+    },
+    {
+      "repo": "Bandwidth-Prioritizer",
+      "url": "https://github.com/Shidori5417/Bandwidth-Prioritizer",
+      "kind": "work",
+      "text": {
+        "en": "Linux build fixed, config hot reload and IPC hardening done; packet shaping is still experimental.",
+        "tr": "Linux derlemesi düzeltildi, config sıcak yükleme ve IPC güvenliği tamamlandı; paket şekillendirme hâlâ deneysel."
+      }
+    },
+    {
+      "repo": "nobetci",
+      "url": "https://github.com/Shidori5417/nobetci",
+      "kind": "release",
+      "tag": "v0.1.0",
+      "date": "2026-11-12",
+      "text": {
+        "en": "nobetci v0.1.0 is out",
+        "tr": "nobetci v0.1.0 yayınlandı"
+      }
+    }
+  ],
+  "repos": {
+    "arctop": {
+      "url": "https://github.com/Shidori5417/arctop",
+      "description": "Terminal-based live monitor for Intel Arc GPUs (Rust, ratatui)",
+      "status": "active",
+      "focus": {
+        "en": "TUI v2 is done; preparing the first release (v0.1).",
+        "tr": "TUI v2 tamamlandı; ilk sürüm (v0.1) hazırlanıyor."
+      },
+      "note": {
+        "en": "Primary target is Arc A750 (i915); xe driver and Battlemage support are secondary targets.",
+        "tr": "Birincil hedef Arc A750 (i915); xe sürücüsü ve Battlemage desteği ikincil hedef."
+      },
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:16Z",
+      "lastWorkAt": "2026-11-23T23:22:46Z",
+      "activityScore": 21.13,
+      "latestRelease": null
+    },
+    "Bandwidth-Prioritizer": {
+      "url": "https://github.com/Shidori5417/Bandwidth-Prioritizer",
+      "description": "Network traffic shaper that throttles non-critical apps while priority apps are active (Rust, Windows)",
+      "status": "prototype",
+      "focus": {
+        "en": "Linux build fixed, config hot reload and IPC hardening done; packet shaping is still experimental.",
+        "tr": "Linux derlemesi düzeltildi, config sıcak yükleme ve IPC güvenliği tamamlandı; paket şekillendirme hâlâ deneysel."
+      },
+      "note": {
+        "en": "Prototype: the default build does not shape traffic, and the WinDivert backend is opt-in and not yet tested on real Windows. Linux builds exist for development and CI; the tc htb controller is not implemented yet.",
+        "tr": "Prototip: varsayılan derleme trafiği şekillendirmez, WinDivert arka ucu isteğe bağlı ve gerçek Windows'ta henüz test edilmedi. Linux derlemesi geliştirme ve CI içindir; tc htb denetleyicisi henüz yok."
+      },
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:18Z",
+      "lastWorkAt": "2026-11-24T23:36:01Z",
+      "activityScore": 2.81,
+      "latestRelease": {
+        "tag": "v1.0.0",
+        "publishedAt": "2026-03-18T01:11:43Z",
+        "url": "https://github.com/Shidori5417/Bandwidth-Prioritizer/releases/tag/v1.0.0"
+      }
+    },
+    "Context-Switcher": {
+      "url": "https://github.com/Shidori5417/Context-Switcher",
+      "description": "Switch work modes with one command: processes, window layout, browser and audio change together (Python CLI/TUI)",
+      "status": "maintenance",
+      "focus": {
+        "en": "Rollback and process tracking fixes, CI with ruff.",
+        "tr": "Geri alma ve süreç takibi düzeltmeleri, ruff ile CI."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:20Z",
+      "lastWorkAt": "2026-11-23T23:22:56Z",
+      "activityScore": 0.48,
+      "latestRelease": null
+    },
+    "digcord": {
+      "url": "https://github.com/Shidori5417/digcord",
+      "description": "Terminal (TUI) Discord client written in Rust — early stage, ratatui",
+      "status": "paused",
+      "focus": {
+        "en": "On hold after the initial skeleton.",
+        "tr": "İlk iskeletten sonra beklemede."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:22Z",
+      "lastWorkAt": null,
+      "activityScore": 0.0,
+      "latestRelease": null
+    },
+    "DomainSniper": {
+      "url": "https://github.com/Shidori5417/DomainSniper",
+      "description": "DomainGözcü: 24/7 domain status monitor (DNS/RDAP/WHOIS) with Discord/Telegram alerts (Rust)",
+      "status": "maintenance",
+      "focus": {
+        "en": "Stable 24/7 service; maintenance and CI.",
+        "tr": "Kararlı 7/24 servis; bakım ve CI."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:24Z",
+      "lastWorkAt": null,
+      "activityScore": 0.0,
+      "latestRelease": null
+    },
+    "ExifGhost": {
+      "url": "https://github.com/Shidori5417/ExifGhost",
+      "description": "Desktop app that strips metadata from photos, audio and video locally (Python, CustomTkinter)",
+      "status": "maintenance",
+      "focus": {
+        "en": "Metadata stripping fixes (JPEG orientation, APNG, MP4/MOV GPS, WAV) with tests and CI.",
+        "tr": "Metadata temizleme düzeltmeleri (JPEG yönü, APNG, MP4/MOV GPS, WAV), testler ve CI."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:26Z",
+      "lastWorkAt": "2026-11-23T23:22:26Z",
+      "activityScore": 0.81,
+      "latestRelease": null
+    },
+    "helios-agent": {
+      "url": "https://github.com/Shidori5417/helios-agent",
+      "description": "Provider-neutral terminal coding agent in Rust: permission-checked tools, ratatui TUI, SQLite sessions, MCP/LSP",
+      "status": "active",
+      "focus": {
+        "en": "Fixed high-risk tool approval and a UTF-8 truncation panic; faster file search.",
+        "tr": "Yüksek riskli araç onayı ve UTF-8 kırpma hatası düzeltildi; dosya araması hızlandı."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:28Z",
+      "lastWorkAt": "2026-11-23T23:28:27Z",
+      "activityScore": 2.03,
+      "latestRelease": null
+    },
+    "micctl": {
+      "url": "https://github.com/Shidori5417/micctl",
+      "description": "PipeWire microphone DSP, soundboard and FX — CLI/TUI (Rust)",
+      "status": "maintenance",
+      "focus": {
+        "en": "Superseded by micforge; maintenance only.",
+        "tr": "Yerini micforge aldı; yalnızca bakım."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:29Z",
+      "lastWorkAt": "2026-11-24T23:30:42Z",
+      "activityScore": 0.94,
+      "latestRelease": null
+    },
+    "micforge": {
+      "url": "https://github.com/Shidori5417/micforge",
+      "description": "Real-time microphone processing in the terminal for Linux (PipeWire, Rust, ratatui)",
+      "status": "released",
+      "focus": {
+        "en": "v0.1.0 is out with AUR, .deb and .rpm packages.",
+        "tr": "v0.1.0 yayında: AUR, .deb ve .rpm paketleri."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:31Z",
+      "lastWorkAt": null,
+      "activityScore": 0.0,
+      "latestRelease": {
+        "tag": "v0.1.0",
+        "publishedAt": "2026-11-08T10:21:12Z",
+        "url": "https://github.com/Shidori5417/micforge/releases/tag/v0.1.0"
+      }
+    },
+    "nobetci": {
+      "url": "https://github.com/Shidori5417/nobetci",
+      "description": "Agentless multi-server Linux monitoring TUI over SSH (Rust, ratatui)",
+      "status": "released",
+      "focus": {
+        "en": "v0.1.0 is out; bug fixes and maintenance.",
+        "tr": "v0.1.0 yayında; hata düzeltmeleri ve bakım."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:33Z",
+      "lastWorkAt": "2026-11-23T23:22:51Z",
+      "activityScore": 1.51,
+      "latestRelease": {
+        "tag": "v0.1.0",
+        "publishedAt": "2026-11-12T13:55:18Z",
+        "url": "https://github.com/Shidori5417/nobetci/releases/tag/v0.1.0"
+      }
+    },
+    "pakiz": {
+      "url": "https://github.com/Shidori5417/pakiz",
+      "description": "Wireshark-like terminal packet analyzer for Linux without libpcap (Rust, AF_PACKET, ratatui)",
+      "status": "active",
+      "focus": {
+        "en": "Memory budget for stream reassembly and a refreshed TUI (themes, command palette).",
+        "tr": "Akış birleştirme için bellek bütçesi ve yenilenen TUI (temalar, komut paleti)."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:35Z",
+      "lastWorkAt": "2026-11-23T23:22:36Z",
+      "activityScore": 1.9,
+      "latestRelease": null
+    },
+    "proxyforge": {
+      "url": "https://github.com/Shidori5417/proxyforge",
+      "description": "Fast, concurrent proxy checker for HTTP, HTTPS, SOCKS4 and SOCKS5 proxies",
+      "status": "active",
+      "focus": {
+        "en": "v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.",
+        "tr": "v0.3.0 yayında: canlı ayar paneli, GeoIP filtreleri ve dönen proxy sunucusu."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:37Z",
+      "lastWorkAt": "2026-11-23T23:22:17Z",
+      "activityScore": 9.24,
+      "latestRelease": {
+        "tag": "v0.3.0",
+        "publishedAt": "2026-11-20T00:33:59Z",
+        "url": "https://github.com/Shidori5417/proxyforge/releases/tag/v0.3.0"
+      }
+    },
+    "VanityGozcu": {
+      "url": "https://github.com/Shidori5417/VanityGozcu",
+      "description": "Discord vanity URL monitor with notifications (Rust, ratatui TUI)",
+      "status": "maintenance",
+      "focus": {
+        "en": "Fixed a Unix socket race and added SQLite event retention.",
+        "tr": "Unix socket yarışı düzeltildi, SQLite olay saklama süresi eklendi."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:38Z",
+      "lastWorkAt": "2026-11-23T23:23:01Z",
+      "activityScore": 0.81,
+      "latestRelease": null
+    },
+    "vuln-stack": {
+      "url": "https://github.com/Shidori5417/vuln-stack",
+      "description": "Find known CVE/GHSA vulnerabilities in your exact dependency versions from lock files — CLI + web app (OSV.dev, 11 ecosystems)",
+      "status": "released",
+      "focus": {
+        "en": "Live on Vercel; the CLI and web app cover 11 ecosystems.",
+        "tr": "Vercel'de yayında; CLI ve web uygulaması 11 ekosistemi kapsıyor."
+      },
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T10:31:40Z",
+      "lastWorkAt": null,
+      "activityScore": 0.0,
+      "latestRelease": null
+    }
+  }
+}
