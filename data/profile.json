@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T12:47:18Z",
+  "generatedAt": "2026-11-26T12:23:49Z",
   "owner": "Shidori5417",
   "now": [
     {
@@ -98,7 +98,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:20Z",
       "lastWorkAt": "2026-11-23T23:22:56Z",
-      "activityScore": 1.0,
+      "activityScore": 0.5,
       "latestRelease": null
     },
     "digcord": {
@@ -227,7 +227,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:33Z",
       "lastWorkAt": "2026-11-23T23:22:51Z",
-      "activityScore": 7.5,
+      "activityScore": 2.0,
       "latestRelease": {
         "tag": "v0.1.0",
         "publishedAt": "2026-11-12T13:55:18Z",
@@ -247,7 +247,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:35Z",
       "lastWorkAt": "2026-11-23T23:22:36Z",
-      "activityScore": 3.0,
+      "activityScore": 2.0,
       "latestRelease": null
     },
     "proxyforge": {
