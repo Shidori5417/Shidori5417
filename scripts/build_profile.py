@@ -44,6 +44,9 @@ WINDOW_DAYS = 14
 DECAY_DAYS = 7.0
 COMMIT_CAP = 300
 MIN_SCORE = 0.3
+# profile.json'a yazılan activityScore bu değerle sınırlanıp tam sayıya yuvarlanır (0, 1, 2, 3+);
+# ince değişimler dosyayı (ve dolayısıyla commit/deploy'u) her gün değiştirmesin.
+SCORE_BUCKET_MAX = 3
 MAX_WORK = 3
 MAX_NOW = 4
 RELEASE_DAYS = 14
@@ -303,6 +306,21 @@ def sum_commits(commits: list[dict], now: dt.datetime) -> tuple[float, str | Non
     return total, (fmt_ts(newest) if newest else None)
 
 
+def bucket_score(weight_sum: float) -> int:
+    """Ağırlıklı commit toplamını 0..SCORE_BUCKET_MAX arasında kovaya çevirir."""
+    return max(0, min(SCORE_BUCKET_MAX, int(round(weight_sum))))
+
+
+def day_precision(stamp: str | None) -> str | None:
+    """ISO zaman damgasını gün hassasiyetine indirir (aynı gün içindeki saat farkı dosyayı değiştirmesin)."""
+    if not stamp:
+        return stamp
+    try:
+        return fmt_ts(parse_ts(stamp).replace(hour=0, minute=0, second=0, microsecond=0))
+    except (TypeError, ValueError):
+        return stamp
+
+
 def rank_score(r: dict, now: dt.datetime) -> float:
     """Now sıralaması: commit başına zamanla azalan skor (_rank); yoksa
     ağırlıklı toplam, son çalışmanın yaşına göre azaltılır."""
@@ -369,7 +387,7 @@ def collect_repo(api, owner: str, repo: dict, now: dt.datetime, prev: dict | Non
             rank, _ = score_commits(commits, now)
         except ApiError as exc:
             warn(f"{name}: commit'ler alınamadı ({exc}); önceki değer korundu")
-            weight_sum, last_work = prev.get("activityScore", 0.0), prev.get("lastWorkAt")
+            weight_sum, last_work = prev.get("activityScore") or 0, prev.get("lastWorkAt")
 
     release = prev.get("latestRelease")
     try:
@@ -394,10 +412,9 @@ def collect_repo(api, owner: str, repo: dict, now: dt.datetime, prev: dict | Non
         "stars": int(repo.get("stargazers_count") or 0),
         "archived": archived,
         "pushedAt": repo.get("pushed_at"),
-        "lastWorkAt": last_work,
-        # Kayıtta zamanla azalan skor değil, penceredeki ağırlıklı commit toplamı
-        # tutulur; aksi halde dosya her gün değişir, her gün commit/deploy olur.
-        "activityScore": round(weight_sum, 1),
+        # Gün hassasiyeti ve kovalanmış skor: saat/kesir farkları dosyayı her gün değiştirmesin.
+        "lastWorkAt": day_precision(last_work),
+        "activityScore": bucket_score(weight_sum),
         "latestRelease": release,
         # Yalnızca bu çalışmadaki sıralama için; JSON'a yazılmaz (strip_private).
         "_rank": rank,
@@ -473,12 +490,16 @@ def build_now(repos: dict, now: dt.datetime) -> list[dict]:
          if not r["archived"] and r["status"] != "archived" and rank_score(r, now) > MIN_SCORE),
         key=lambda kv: (-rank_score(kv[1], now), kv[1]["lastWorkAt"] or "", kv[0].lower()),
     )
-    for name, r in ranked[:MAX_WORK]:
-        fallback = r["description"] or "Recent work"
-        fallback_tr = r["description"] or "Son çalışmalar"
-        text = r["focus"] or {"en": fallback, "tr": fallback_tr}
+    for name, r in ranked:
+        if len(items) >= MAX_WORK:
+            break
+        # Türkçe sayfaya ham (İngilizce) GitHub açıklaması sızmasın: iki dilli `focus` olmayan
+        # repo Now'a alınmaz. Çözüm: reponun .github/status.yml dosyasına focus.en/focus.tr eklemek.
+        if not r["focus"]:
+            warn(f"{name}: son günlerde aktif ama .github/status.yml içinde focus yok; Now'a alınmadı")
+            continue
         items.append({"repo": name, "url": r["url"], "kind": "work",
-                      "text": {"en": text["en"], "tr": text["tr"]}})
+                      "text": {"en": r["focus"]["en"], "tr": r["focus"]["tr"]}})
     covered = {i["repo"] for i in items}
 
     cutoff = now - dt.timedelta(days=RELEASE_DAYS)

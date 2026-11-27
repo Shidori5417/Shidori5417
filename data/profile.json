@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T12:09:44Z",
+  "generatedAt": "2026-11-27T23:28:29Z",
   "owner": "Shidori5417",
   "now": [
     {
@@ -13,21 +13,32 @@
       }
     },
     {
-      "repo": "mcstat",
-      "url": "https://github.com/Shidori5417/mcstat",
-      "kind": "work",
-      "text": {
-        "en": "Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)",
-        "tr": "Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)"
-      }
-    },
-    {
       "repo": "proxyforge",
       "url": "https://github.com/Shidori5417/proxyforge",
       "kind": "work",
       "text": {
         "en": "v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.",
         "tr": "v0.3.0 yayında: canlı ayar paneli, GeoIP filtreleri ve dönen proxy sunucusu."
+      }
+    },
+    {
+      "repo": "Bandwidth-Prioritizer",
+      "url": "https://github.com/Shidori5417/Bandwidth-Prioritizer",
+      "kind": "work",
+      "text": {
+        "en": "Linux build fixed, config hot reload and IPC hardening done; packet shaping is still experimental.",
+        "tr": "Linux derlemesi düzeltildi, config sıcak yükleme ve IPC güvenliği tamamlandı; paket şekillendirme hâlâ deneysel."
+      }
+    },
+    {
+      "repo": "win-opt-suite",
+      "url": "https://github.com/Shidori5417/win-opt-suite",
+      "kind": "release",
+      "tag": "v0.1.0",
+      "date": "2026-11-25",
+      "text": {
+        "en": "win-opt-suite v0.1.0 is out",
+        "tr": "win-opt-suite v0.1.0 yayınlandı"
       }
     }
   ],
@@ -47,8 +58,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:16Z",
-      "lastWorkAt": "2026-11-23T23:22:46Z",
-      "activityScore": 46.0,
+      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "activityScore": 3,
       "latestRelease": null
     },
     "Bandwidth-Prioritizer": {
@@ -66,8 +77,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:18Z",
-      "lastWorkAt": "2026-11-24T23:36:01Z",
-      "activityScore": 2.5,
+      "lastWorkAt": "2026-11-24T00:00:00Z",
+      "activityScore": 2,
       "latestRelease": {
         "tag": "v1.0.0",
         "publishedAt": "2026-03-18T01:11:43Z",
@@ -86,8 +97,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:20Z",
-      "lastWorkAt": "2026-11-23T23:22:56Z",
-      "activityScore": 0.5,
+      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "activityScore": 0,
       "latestRelease": null
     },
     "digcord": {
@@ -103,7 +114,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:22Z",
       "lastWorkAt": null,
-      "activityScore": 0.0,
+      "activityScore": 0,
       "latestRelease": null
     },
     "DomainSniper": {
@@ -119,7 +130,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:24Z",
       "lastWorkAt": null,
-      "activityScore": 0.0,
+      "activityScore": 0,
       "latestRelease": null
     },
     "ExifGhost": {
@@ -134,8 +145,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:26Z",
-      "lastWorkAt": "2026-11-23T23:22:26Z",
-      "activityScore": 1.0,
+      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "activityScore": 1,
       "latestRelease": null
     },
     "helios-agent": {
@@ -150,8 +161,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:28Z",
-      "lastWorkAt": "2026-11-23T23:28:27Z",
-      "activityScore": 2.5,
+      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "activityScore": 2,
       "latestRelease": null
     },
     "mcstat": {
@@ -163,8 +174,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T12:14:16Z",
-      "lastWorkAt": "2026-11-25T12:04:47Z",
-      "activityScore": 20.0,
+      "lastWorkAt": "2026-11-25T00:00:00Z",
+      "activityScore": 3,
       "latestRelease": null
     },
     "micctl": {
@@ -179,8 +190,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:29Z",
-      "lastWorkAt": "2026-11-24T23:30:42Z",
-      "activityScore": 1.0,
+      "lastWorkAt": "2026-11-24T00:00:00Z",
+      "activityScore": 1,
       "latestRelease": null
     },
     "micforge": {
@@ -196,7 +207,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:31Z",
       "lastWorkAt": null,
-      "activityScore": 0.0,
+      "activityScore": 0,
       "latestRelease": {
         "tag": "v0.1.0",
         "publishedAt": "2026-11-08T10:21:12Z",
@@ -215,8 +226,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:33Z",
-      "lastWorkAt": "2026-11-23T23:22:51Z",
-      "activityScore": 0.5,
+      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "activityScore": 0,
       "latestRelease": {
         "tag": "v0.1.0",
         "publishedAt": "2026-11-12T13:55:18Z",
@@ -235,8 +246,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:35Z",
-      "lastWorkAt": "2026-11-23T23:22:36Z",
-      "activityScore": 2.0,
+      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "activityScore": 2,
       "latestRelease": null
     },
     "proxyforge": {
@@ -251,8 +262,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:37Z",
-      "lastWorkAt": "2026-11-23T23:22:17Z",
-      "activityScore": 24.5,
+      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "activityScore": 3,
       "latestRelease": {
         "tag": "v0.3.0",
         "publishedAt": "2026-11-20T00:33:59Z",
@@ -271,8 +282,8 @@
       "stars": 0,
       "archived": false,
       "pushedAt": "2026-11-25T10:31:38Z",
-      "lastWorkAt": "2026-11-23T23:23:01Z",
-      "activityScore": 1.0,
+      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "activityScore": 1,
       "latestRelease": null
     },
     "vuln-stack": {
@@ -288,8 +299,25 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:40Z",
       "lastWorkAt": null,
-      "activityScore": 0.0,
+      "activityScore": 0,
       "latestRelease": null
+    },
+    "win-opt-suite": {
+      "url": "https://github.com/Shidori5417/win-opt-suite",
+      "description": "Native, transparent, atomically reversible Windows 11 optimisation suite (Rust + Tauri v2)",
+      "status": null,
+      "focus": null,
+      "note": null,
+      "stars": 0,
+      "archived": false,
+      "pushedAt": "2026-11-25T17:22:58Z",
+      "lastWorkAt": "2026-11-25T00:00:00Z",
+      "activityScore": 3,
+      "latestRelease": {
+        "tag": "v0.1.0",
+        "publishedAt": "2026-11-25T17:23:00Z",
+        "url": "https://github.com/Shidori5417/win-opt-suite/releases/tag/v0.1.0"
+      }
     }
   },
   "pinned": [

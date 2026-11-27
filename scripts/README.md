@@ -83,8 +83,8 @@ note:                 # isteğe bağlı
 ### Now nasıl seçilir
 
 - Son 14 günün commit'leri puanlanır: `puan = Σ ağırlık · exp(-yaş_gün / 7)`. Merge, bot, `docs/ci/chore/style/build/deps:` önekli ve badge/README commit'leri sayılmaz; `fix` yarım, diğerleri tam puan.
-- `profile.json` içindeki `activityScore` zamanla azalmayan ağırlıklı toplamdır (dosya her gün değişip gereksiz commit/deploy olmasın diye); zamanla azalan puan yalnızca sıralamada kullanılır.
-- Puanı 0.3'ün üstündeki en iyi 3 repo "work" maddesi olur (metin: `focus`, yoksa repo açıklaması).
+- `profile.json` içindeki `activityScore` zamanla azalmayan, tam sayıya yuvarlanmış ve `0..3` ile sınırlı bir kovadır (`3` = 3+); `lastWorkAt` gün hassasiyetindedir (`…T00:00:00Z`). Böylece dosya her gün değişip gereksiz commit/deploy olmaz; zamanla azalan ince puan yalnızca sıralamada kullanılır ve dosyaya yazılmaz.
+- Puanı 0.3'ün üstündeki en iyi 3 repo "work" maddesi olur. Metin her zaman reponun `status.yml` içindeki iki dilli `focus` alanından gelir; `focus`'u olmayan repo (Türkçe sayfaya ham İngilizce GitHub açıklaması sızmasın diye) Now'a alınmaz ve log'a uyarı yazılır — çözüm o repoya `.github/status.yml` eklemektir.
 - Son 14 günde yayınlanan release'ler (aynı repo zaten "work" ise eklenmez) "release" maddesi olur. En fazla 4 madde.
 - Hiçbiri yoksa tek satır: "Quiet stretch; see the repos above."
 - `archived` repolar (GitHub ya da `status: archived`) puanlanmaz. Yalnızca public, fork olmayan repolar işlenir; profil reposu ve private repolar çıktıda hiç geçmez.
@@ -96,7 +96,7 @@ Portföy sitesinin okuduğu sözleşme (`schemaVersion: 1`): `generatedAt`, `own
 
 ## Workflow
 
-1. `build_cards.py` kartları üretir.
+1. `build_cards.py` kartları üretir (genel bakış ve dil dağılımı).
 2. `build_profile.py` README bölümlerini ve `data/profile.json`'ı üretir (`pip install pyyaml` gerekir; `GITHUB_TOKEN` pinned listesi için kullanılır).
 3. Değişiklik varsa (kartlarda yalnızca tarih değişimi sayılmaz) `assets`, `README.md`, `data` commit'lenip push'lanır.
-4. `data/profile.json` değiştiyse ve `VERCEL_DEPLOY_HOOK` secret'ı tanımlıysa portföy sitesi bu hook'a POST atılarak yeniden dağıtılır (hook adresi loglanmaz).
+4. `data/profile.json` değiştiyse (yalnızca `generatedAt`/`activityScore`/`lastWorkAt` farkları sayılmaz) ve `VERCEL_DEPLOY_HOOK` secret'ı tanımlıysa portföy sitesi bu hook'a POST atılarak yeniden dağıtılır (hook adresi loglanmaz).
