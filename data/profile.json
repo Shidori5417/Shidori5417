@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T12:23:49Z",
+  "generatedAt": "2026-11-27T12:09:44Z",
   "owner": "Shidori5417",
   "now": [
     {
@@ -28,17 +28,6 @@
       "text": {
         "en": "v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.",
         "tr": "v0.3.0 yayında: canlı ayar paneli, GeoIP filtreleri ve dönen proxy sunucusu."
-      }
-    },
-    {
-      "repo": "nobetci",
-      "url": "https://github.com/Shidori5417/nobetci",
-      "kind": "release",
-      "tag": "v0.1.0",
-      "date": "2026-11-12",
-      "text": {
-        "en": "nobetci v0.1.0 is out",
-        "tr": "nobetci v0.1.0 yayınlandı"
       }
     }
   ],
@@ -227,7 +216,7 @@
       "archived": false,
       "pushedAt": "2026-11-25T10:31:33Z",
       "lastWorkAt": "2026-11-23T23:22:51Z",
-      "activityScore": 2.0,
+      "activityScore": 0.5,
       "latestRelease": {
         "tag": "v0.1.0",
         "publishedAt": "2026-11-12T13:55:18Z",

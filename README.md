@@ -60,7 +60,6 @@
 - [arctop](https://github.com/Shidori5417/arctop): TUI v2 is done; preparing the first release (v0.1).
 - [mcstat](https://github.com/Shidori5417/mcstat): Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)
 - [proxyforge](https://github.com/Shidori5417/proxyforge): v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.
-- [nobetci](https://github.com/Shidori5417/nobetci) v0.1.0 is out
 <!-- NOW:END -->
 
 ## Stack
