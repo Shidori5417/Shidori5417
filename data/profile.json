@@ -1,8 +1,17 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T23:28:29Z",
+  "generatedAt": "2026-11-28T11:12:30Z",
   "owner": "Shidori5417",
   "now": [
+    {
+      "repo": "win-opt-suite",
+      "url": "https://github.com/Shidori5417/win-opt-suite",
+      "kind": "work",
+      "text": {
+        "en": "v0.1.0 is out: native Windows 11 optimisation with atomic rollback (Rust + Tauri v2).",
+        "tr": "v0.1.0 yayında: atomik geri alma destekli native Windows 11 optimizasyonu (Rust + Tauri v2)."
+      }
+    },
     {
       "repo": "arctop",
       "url": "https://github.com/Shidori5417/arctop",
@@ -13,32 +22,23 @@
       }
     },
     {
+      "repo": "mcstat",
+      "url": "https://github.com/Shidori5417/mcstat",
+      "kind": "work",
+      "text": {
+        "en": "Live Minecraft Java server monitor: parallel pings, SRV lookup, a ratatui dashboard and a --once mode for scripts.",
+        "tr": "Canlı Minecraft Java sunucu izleyicisi: paralel ping, SRV araması, ratatui paneli ve betikler için --once modu."
+      }
+    },
+    {
       "repo": "proxyforge",
       "url": "https://github.com/Shidori5417/proxyforge",
-      "kind": "work",
-      "text": {
-        "en": "v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.",
-        "tr": "v0.3.0 yayında: canlı ayar paneli, GeoIP filtreleri ve dönen proxy sunucusu."
-      }
-    },
-    {
-      "repo": "Bandwidth-Prioritizer",
-      "url": "https://github.com/Shidori5417/Bandwidth-Prioritizer",
-      "kind": "work",
-      "text": {
-        "en": "Linux build fixed, config hot reload and IPC hardening done; packet shaping is still experimental.",
-        "tr": "Linux derlemesi düzeltildi, config sıcak yükleme ve IPC güvenliği tamamlandı; paket şekillendirme hâlâ deneysel."
-      }
-    },
-    {
-      "repo": "win-opt-suite",
-      "url": "https://github.com/Shidori5417/win-opt-suite",
       "kind": "release",
-      "tag": "v0.1.0",
-      "date": "2026-11-25",
+      "tag": "v0.3.0",
+      "date": "2026-11-20",
       "text": {
-        "en": "win-opt-suite v0.1.0 is out",
-        "tr": "win-opt-suite v0.1.0 yayınlandı"
+        "en": "proxyforge v0.3.0 is out",
+        "tr": "proxyforge v0.3.0 yayınlandı"
       }
     }
   ],
@@ -57,8 +57,8 @@
       },
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:16Z",
-      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "pushedAt": "2026-11-28T11:10:10Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
       "activityScore": 3,
       "latestRelease": null
     },
@@ -76,9 +76,9 @@
       },
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:18Z",
-      "lastWorkAt": "2026-11-24T00:00:00Z",
-      "activityScore": 2,
+      "pushedAt": "2026-11-28T11:10:01Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
+      "activityScore": 3,
       "latestRelease": {
         "tag": "v1.0.0",
         "publishedAt": "2026-03-18T01:11:43Z",
@@ -96,9 +96,9 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:20Z",
-      "lastWorkAt": "2026-11-23T00:00:00Z",
-      "activityScore": 0,
+      "pushedAt": "2026-11-28T11:09:54Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
+      "activityScore": 1,
       "latestRelease": null
     },
     "digcord": {
@@ -112,8 +112,8 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:22Z",
-      "lastWorkAt": null,
+      "pushedAt": "2026-11-28T11:10:55Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
       "activityScore": 0,
       "latestRelease": null
     },
@@ -128,7 +128,7 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:24Z",
+      "pushedAt": "2026-11-28T11:10:33Z",
       "lastWorkAt": null,
       "activityScore": 0,
       "latestRelease": null
@@ -144,9 +144,9 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:26Z",
-      "lastWorkAt": "2026-11-23T00:00:00Z",
-      "activityScore": 1,
+      "pushedAt": "2026-11-28T11:09:46Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
+      "activityScore": 2,
       "latestRelease": null
     },
     "helios-agent": {
@@ -160,7 +160,7 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:28Z",
+      "pushedAt": "2026-11-28T11:11:10Z",
       "lastWorkAt": "2026-11-23T00:00:00Z",
       "activityScore": 2,
       "latestRelease": null
@@ -168,12 +168,15 @@
     "mcstat": {
       "url": "https://github.com/Shidori5417/mcstat",
       "description": "Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)",
-      "status": null,
-      "focus": null,
+      "status": "active",
+      "focus": {
+        "en": "Live Minecraft Java server monitor: parallel pings, SRV lookup, a ratatui dashboard and a --once mode for scripts.",
+        "tr": "Canlı Minecraft Java sunucu izleyicisi: paralel ping, SRV araması, ratatui paneli ve betikler için --once modu."
+      },
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T12:14:16Z",
+      "pushedAt": "2026-11-28T11:09:30Z",
       "lastWorkAt": "2026-11-25T00:00:00Z",
       "activityScore": 3,
       "latestRelease": null
@@ -189,9 +192,9 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:29Z",
-      "lastWorkAt": "2026-11-24T00:00:00Z",
-      "activityScore": 1,
+      "pushedAt": "2026-11-28T11:11:40Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
+      "activityScore": 2,
       "latestRelease": null
     },
     "micforge": {
@@ -199,14 +202,14 @@
       "description": "Real-time microphone processing in the terminal for Linux (PipeWire, Rust, ratatui)",
       "status": "released",
       "focus": {
-        "en": "v0.1.0 is out with AUR, .deb and .rpm packages.",
-        "tr": "v0.1.0 yayında: AUR, .deb ve .rpm paketleri."
+        "en": "v0.1.0 is out with .deb, .rpm and Arch PKGBUILD packages.",
+        "tr": "v0.1.0 yayında: .deb, .rpm ve Arch PKGBUILD paketleri."
       },
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:31Z",
-      "lastWorkAt": null,
+      "pushedAt": "2026-11-28T11:11:32Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
       "activityScore": 0,
       "latestRelease": {
         "tag": "v0.1.0",
@@ -225,9 +228,9 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:33Z",
-      "lastWorkAt": "2026-11-23T00:00:00Z",
-      "activityScore": 0,
+      "pushedAt": "2026-11-28T11:11:25Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
+      "activityScore": 1,
       "latestRelease": {
         "tag": "v0.1.0",
         "publishedAt": "2026-11-12T13:55:18Z",
@@ -245,8 +248,8 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:35Z",
-      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "pushedAt": "2026-11-28T11:11:17Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
       "activityScore": 2,
       "latestRelease": null
     },
@@ -261,8 +264,8 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:37Z",
-      "lastWorkAt": "2026-11-23T00:00:00Z",
+      "pushedAt": "2026-11-28T11:10:25Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
       "activityScore": 3,
       "latestRelease": {
         "tag": "v0.3.0",
@@ -281,9 +284,9 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:38Z",
-      "lastWorkAt": "2026-11-23T00:00:00Z",
-      "activityScore": 1,
+      "pushedAt": "2026-11-28T11:10:40Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
+      "activityScore": 2,
       "latestRelease": null
     },
     "vuln-stack": {
@@ -297,20 +300,23 @@
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T10:31:40Z",
-      "lastWorkAt": null,
-      "activityScore": 0,
+      "pushedAt": "2026-11-28T11:11:03Z",
+      "lastWorkAt": "2026-11-28T00:00:00Z",
+      "activityScore": 1,
       "latestRelease": null
     },
     "win-opt-suite": {
       "url": "https://github.com/Shidori5417/win-opt-suite",
       "description": "Native, transparent, atomically reversible Windows 11 optimisation suite (Rust + Tauri v2)",
-      "status": null,
-      "focus": null,
+      "status": "released",
+      "focus": {
+        "en": "v0.1.0 is out: native Windows 11 optimisation with atomic rollback (Rust + Tauri v2).",
+        "tr": "v0.1.0 yayında: atomik geri alma destekli native Windows 11 optimizasyonu (Rust + Tauri v2)."
+      },
       "note": null,
       "stars": 0,
       "archived": false,
-      "pushedAt": "2026-11-25T17:22:58Z",
+      "pushedAt": "2026-11-28T11:09:39Z",
       "lastWorkAt": "2026-11-25T00:00:00Z",
       "activityScore": 3,
       "latestRelease": {
