@@ -63,8 +63,17 @@ jobs:
             echo "Her şey güncel."
             exit 0
           fi
+          # Portföyü yalnızca sitenin gösterdiği alanlar değiştiyse yeniden dağıt:
+          # generatedAt/activityScore/lastWorkAt tek başına değişirse commit atılır ama deploy tetiklenmez.
           if ! git diff --quiet -- data/profile.json; then
-            echo "profile_changed=true" >> "$GITHUB_OUTPUT"
+            strip='del(.generatedAt) | del(.repos[]?.activityScore, .repos[]?.lastWorkAt)'
+            before=$(git show HEAD:data/profile.json 2>/dev/null | jq -S "$strip" 2>/dev/null || echo "none")
+            after=$(jq -S "$strip" data/profile.json)
+            if [ "$before" != "$after" ]; then
+              echo "profile_changed=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "profile.json'da yalnızca gürültü alanları değişti; dağıtım atlanacak."
+            fi
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

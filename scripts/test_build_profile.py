@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import json
 import math
 import sys
 import unittest
@@ -28,10 +29,12 @@ def entry(**kw):
     base = {
         "url": "https://github.com/o/r", "description": "desc", "status": None, "focus": None,
         "note": None, "stars": 0, "archived": False, "pushedAt": "2026-11-25T00:00:00Z",
-        "lastWorkAt": None, "activityScore": 0.0, "latestRelease": None,
+        "lastWorkAt": None, "activityScore": 0, "latestRelease": None,
     }
     if kw.get("activityScore") and "lastWorkAt" not in kw:
         kw["lastWorkAt"] = bp.fmt_ts(NOW)  # rank_score = activityScore
+    if kw.get("activityScore") and "focus" not in kw:
+        kw["focus"] = {"en": "Working", "tr": "Çalışılıyor"}  # focus'suz repo Now'a girmez
     base.update(kw)
     return base
 
@@ -106,12 +109,21 @@ class NowList(unittest.TestCase):
         self.assertEqual([i["repo"] for i in items], ["b", "c", "d"])
         self.assertTrue(all(i["kind"] == "work" for i in items))
 
-    def test_focus_then_description_fallback(self):
+    def test_repo_without_focus_is_skipped_not_leaked(self):
         focus = {"en": "Doing X", "tr": "X yapılıyor"}
-        repos = {"a": entry(activityScore=2, focus=focus), "b": entry(activityScore=1, description="Desc B")}
+        repos = {"a": entry(activityScore=2, focus=focus),
+                 "b": entry(activityScore=3, focus=None, description="Raw English GitHub description")}
         items = bp.build_now(repos, NOW)
+        self.assertEqual([i["repo"] for i in items], ["a"])
         self.assertEqual(items[0]["text"], focus)
-        self.assertEqual(items[1]["text"], {"en": "Desc B", "tr": "Desc B"})
+        self.assertNotIn("Raw English", json.dumps(items, ensure_ascii=False))
+
+    def test_skipped_focusless_repo_does_not_use_up_work_slot(self):
+        repos = {f"w{i}": entry(activityScore=5 - i) for i in range(3)}
+        repos["nofocus"] = entry(activityScore=9, focus=None)
+        repos["w3"] = entry(activityScore=0.4)
+        items = bp.build_now(repos, NOW)
+        self.assertEqual([i["repo"] for i in items], ["w0", "w1", "w2"])
 
     def test_archived_skipped(self):
         repos = {"a": entry(activityScore=9, archived=True), "b": entry(activityScore=9, status="archived")}
@@ -270,7 +282,8 @@ class Collect(unittest.TestCase):
         self.assertEqual(repos["a"]["latestRelease"], {"tag": "v1", "publishedAt": "2026-11-20T00:00:00Z", "url": "u"})
         self.assertIsNone(repos["b"]["latestRelease"])
         self.assertIsNone(repos["c"]["latestRelease"])
-        self.assertEqual(repos["a"]["activityScore"], 1.0)
+        self.assertEqual(repos["a"]["activityScore"], 1)
+        self.assertEqual(repos["a"]["lastWorkAt"], "2026-11-24T00:00:00Z")
         self.assertEqual(set(bp.strip_private(repos)["a"]), {"url", "description", "status", "focus", "note", "stars", "archived",
                                            "pushedAt", "lastWorkAt", "activityScore", "latestRelease"})
 
@@ -278,7 +291,7 @@ class Collect(unittest.TestCase):
         api = FakeApi([gh_repo("old", archived=True), gh_repo("s")], statuses={"s": "status: archived\n"},
                       commits={"old": [commit()], "s": [commit()]})
         repos = bp.collect(api, "o", NOW)
-        self.assertEqual((repos["old"]["activityScore"], repos["s"]["activityScore"]), (0.0, 0.0))
+        self.assertEqual((repos["old"]["activityScore"], repos["s"]["activityScore"]), (0, 0))
 
     def test_invalid_status_is_ignored(self):
         api = FakeApi([gh_repo("a")], statuses={"a": "status: nonsense\n"})
@@ -289,8 +302,25 @@ class Collect(unittest.TestCase):
         prev = {"a": entry(activityScore=3.21, lastWorkAt="2026-11-24T00:00:00Z")}
         api = FakeApi([gh_repo("a")], fail={"a"})
         repos = bp.collect(api, "o", NOW, prev)
-        self.assertEqual(repos["a"]["activityScore"], 3.2)
+        self.assertEqual(repos["a"]["activityScore"], 3)
         self.assertEqual(repos["a"]["lastWorkAt"], "2026-11-24T00:00:00Z")
+
+
+class NoiseReduction(unittest.TestCase):
+    def test_bucket_score_is_integer_and_capped(self):
+        self.assertEqual([bp.bucket_score(x) for x in (0, 0.4, 0.6, 1.5, 2.49, 7.9)], [0, 0, 1, 2, 2, 3])
+        self.assertIsInstance(bp.bucket_score(1.2), int)
+
+    def test_day_precision(self):
+        self.assertEqual(bp.day_precision("2026-11-24T17:45:12Z"), "2026-11-24T00:00:00Z")
+        self.assertIsNone(bp.day_precision(None))
+        self.assertEqual(bp.day_precision("bozuk"), "bozuk")
+
+    def test_collected_entry_stable_across_days(self):
+        commits = {"a": [commit(days_ago=2.3), commit(days_ago=3.1)]}
+        a = bp.collect(FakeApi([gh_repo("a")], commits=commits), "o", NOW)["a"]
+        b = bp.collect(FakeApi([gh_repo("a")], commits=commits), "o", NOW + dt.timedelta(hours=7))["a"]
+        self.assertEqual((a["activityScore"], a["lastWorkAt"]), (b["activityScore"], b["lastWorkAt"]))
 
 
 class GeneratedAt(unittest.TestCase):
@@ -633,5 +663,5 @@ class ReviewFixes(unittest.TestCase):
                 raise bp.ApiError("geçersiz JSON")
 
         prev = {"a": entry(activityScore=2.0)}
-        self.assertEqual(bp.collect(Boom([gh_repo("a")]), "o", NOW, prev)["a"]["activityScore"], 2.0)
-        self.assertEqual(bp.collect(BadJson([gh_repo("a")]), "o", NOW, prev)["a"]["activityScore"], 2.0)
+        self.assertEqual(bp.collect(Boom([gh_repo("a")]), "o", NOW, prev)["a"]["activityScore"], 2)
+        self.assertEqual(bp.collect(BadJson([gh_repo("a")]), "o", NOW, prev)["a"]["activityScore"], 2)

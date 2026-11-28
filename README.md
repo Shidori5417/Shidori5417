@@ -44,13 +44,14 @@
 ## More
 
 <!-- MORE:START -->
+- [win-opt-suite](https://github.com/Shidori5417/win-opt-suite): native, transparent, atomically reversible Windows 11 optimisation suite (Rust + Tauri v2)
 - [mcstat](https://github.com/Shidori5417/mcstat): live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)
-- [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): network traffic shaper that throttles background apps while priority apps like Discord or Zoom run, in Rust · prototype
 - [micctl](https://github.com/Shidori5417/micctl): PipeWire mic DSP and soundboard CLI/TUI, the predecessor of micforge · maintenance
-- [helios-agent](https://github.com/Shidori5417/helios-agent): provider-neutral terminal coding agent in Rust (permission-checked tools, ratatui TUI, MCP/LSP)
+- [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): network traffic shaper that throttles background apps while priority apps like Discord or Zoom run, in Rust · prototype
 - [VanityGozcu](https://github.com/Shidori5417/VanityGozcu): Discord vanity URL monitor with a ratatui TUI and Discord/Telegram notifications, in Rust · maintenance
-- [Context-Switcher](https://github.com/Shidori5417/Context-Switcher): switch work modes with one command (processes, window layout, browser, audio), Python CLI/TUI · maintenance
+- [helios-agent](https://github.com/Shidori5417/helios-agent): provider-neutral terminal coding agent in Rust (permission-checked tools, ratatui TUI, MCP/LSP)
 - [ExifGhost](https://github.com/Shidori5417/ExifGhost): desktop app that strips metadata from photos, audio and video locally, Python · maintenance
+- [Context-Switcher](https://github.com/Shidori5417/Context-Switcher): switch work modes with one command (processes, window layout, browser, audio), Python CLI/TUI · maintenance
 - [digcord](https://github.com/Shidori5417/digcord): terminal Discord client with a ratatui TUI, in Rust (early stage) · on hold
 <!-- MORE:END -->
 
@@ -58,8 +59,9 @@
 
 <!-- NOW:START -->
 - [arctop](https://github.com/Shidori5417/arctop): TUI v2 is done; preparing the first release (v0.1).
-- [mcstat](https://github.com/Shidori5417/mcstat): Live terminal monitor for Minecraft Java Edition servers (Rust, ratatui)
 - [proxyforge](https://github.com/Shidori5417/proxyforge): v0.3.0 is out: live settings panel, GeoIP filters and a rotating local proxy server.
+- [Bandwidth-Prioritizer](https://github.com/Shidori5417/Bandwidth-Prioritizer): Linux build fixed, config hot reload and IPC hardening done; packet shaping is still experimental.
+- [win-opt-suite](https://github.com/Shidori5417/win-opt-suite) v0.1.0 is out
 <!-- NOW:END -->
 
 ## Stack
